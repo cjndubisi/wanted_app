@@ -1,6 +1,6 @@
 module.exports = {
-    pwa: {
-        name: "Wanted",
-        appleMobileWebAppCapable: "yes" 
-    }
-}
+  pwa: {
+    name: 'Wanted',
+    appleMobileWebAppCapable: 'yes',
+  },
+};

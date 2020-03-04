@@ -2,6 +2,7 @@
 
 ## Project setup
 ```
+nvm use `cat .nvmrc`
 npm install
 ```
 
@@ -16,7 +17,8 @@ npm run build
 ```
 ### PWA for Development
 ```
-# Do not create a service worker for Development 
+# Note: For Development, we do not create a service worker for Development
+# We will use `serve` to mimick production. 
 npm install --global serve
 
 # Create production build for service worker
