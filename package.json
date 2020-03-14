@@ -5,12 +5,21 @@
     "ios": "react-native run-ios --simulator='iPhone 6s'",
     "web": "expo start --web",
     "test": "jest",
-    "lint": "eslint .  --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ]
   },
   "dependencies": {
+    "@types/jest": "^25.1.4",
     "expo": "~36.0.0",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
