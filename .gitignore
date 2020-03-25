@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 web-report/
 
+.env.*
 ios/Pods/*
 # macOS
 .DS_Store
