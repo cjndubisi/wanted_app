@@ -37,7 +37,7 @@ const Input = styled.TextInput`
   margin-bottom: 10;
 `;
 
-const fieldsConfiguationOrder = [
+const fieldsConfigurationOrder = [
   {
     placeholder: 'First Name',
     key: 'first_name',
@@ -71,7 +71,7 @@ const fieldsConfiguationOrder = [
     },
   },
   {
-    placeholder: 'Confirm Passwod',
+    placeholder: 'Confirm Password',
     key: 'confirm_password',
     validation: (value): string => {
       const passwordValid = value.length > 6;
@@ -101,12 +101,12 @@ export default () => {
       const response = await register(request);
       console.log(response);
     } catch (error) {
-      console.log(error);
+      console.log(JSON.stringify(error));
     }
   };
 
   const validate = () => {
-    const errors: typeof emailInfo | {} = fieldsConfiguationOrder.reduce((acc, next) => {
+    const errors: typeof emailInfo | {} = fieldsConfigurationOrder.reduce((acc, next) => {
       const error = next.validation(info[next.key]);
       if (error !== '') {
         acc[next.key] = next.validation(info[next.key]);
@@ -121,7 +121,7 @@ export default () => {
     signUp();
   };
 
-  const inputs = fieldsConfiguationOrder.map(input => (
+  const inputs = fieldsConfigurationOrder.map(input => (
     <View key={`input_${input.key}`}>
       <InputError key={`error_${input.key}`}>{formError[input.key]}</InputError>
       <Input
