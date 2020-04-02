@@ -1,8 +1,8 @@
-import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
-import Splash from './Splash';
-import EmailAuth from './EmailAuth';
+import React from 'react';
 import { RootStackParamList } from '../router';
+import EmailAuth from './EmailAuth';
+import Splash from './Splash';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

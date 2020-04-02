@@ -12,7 +12,11 @@ Wanted react Navtive and Web App
 ### Installation
 
 ```
-npm install
+// install Yarn
+brew install yarn
+
+// Install packages
+yarn
 ```
 
 ### Run

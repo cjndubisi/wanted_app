@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { TextProp } from './types';
 
 export const Container = styled.View`
   display: flex;
@@ -16,12 +17,16 @@ export const Title = styled(H1)`
   text-align: center;
 `;
 
-export const Text = styled.Text``;
+export const Text = styled.Text<TextProp>`
+  color: black;
+  font-weight: ${(props) => (props.bold ? 'bold' : 'regular')};
+`;
 
-export const Button = styled.TouchableHighlight`
+export const Button = styled.TouchableOpacity<{ backgroundColor: string }>`
   align-items: center;
   justify-content: center;
   height: 40px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 
 export const Footer = styled.View`
