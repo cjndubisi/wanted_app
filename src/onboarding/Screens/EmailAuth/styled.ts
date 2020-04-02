@@ -10,8 +10,9 @@ export const InputError = styled.Text<{ hasError: boolean }>`
 export const Input = styled.TextInput`
   height: 40px;
   color: black;
-  border-width: 1px;
   padding-left: 10px;
   padding-right: 10;
   font-size: 14px;
+  border-radius: 5px;
+background-color: white;
 `;

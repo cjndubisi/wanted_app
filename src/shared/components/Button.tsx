@@ -4,6 +4,8 @@ import { ButtonProps } from '../types';
 
 export default ({ title, onPress, bold, backgroundColor, titleColor }: ButtonProps) => (
   <Button activeOpacity={0.8} onPress={onPress} backgroundColor={backgroundColor}>
-    <Text style={{ color: titleColor }} bold={bold ? 1 : 0}>{title}</Text>
+    <Text style={{ color: titleColor }} bold={bold ? 1 : 0}>
+      {title}
+    </Text>
   </Button>
-)
+);

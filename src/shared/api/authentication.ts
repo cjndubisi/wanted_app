@@ -5,9 +5,7 @@ const API_URL = 'https://wanted-be.herokuapp.com/v1'; // 'http://localhost:3000/
 export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
   const response = await fetch(`${API_URL}${'/users'}`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
   });
 
@@ -20,4 +18,4 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
   return json;
 };
 
-export const login = async (crede) => { };
+export const login = async (crede) => {};

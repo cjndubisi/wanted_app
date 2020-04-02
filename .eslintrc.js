@@ -19,6 +19,15 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+    'object-curly-newline': [
+      'error',
+      {
+        ObjectExpression: { multiline: true, minProperties: 3 },
+        ObjectPattern: { multiline: true },
+        ImportDeclaration: 'never',
+        ExportDeclaration: { multiline: true, minProperties: 3 },
+      },
+    ],
   },
   overrides: [
     {

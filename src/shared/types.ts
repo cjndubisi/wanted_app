@@ -7,5 +7,5 @@ export type ButtonProps = {
   title: string;
   titleColor?: string;
   backgroundColor?: string;
-  onPress(): void;
+  onPress?(): void;
 };
