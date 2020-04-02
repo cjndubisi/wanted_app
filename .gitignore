@@ -14,3 +14,4 @@ web-report/
 ios/Pods/*
 # macOS
 .DS_Store
+.idea
