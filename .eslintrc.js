@@ -16,9 +16,10 @@ module.exports = {
     jest: true,
   },
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
+    'comma-dangle': ['error', 'ignore'], // Control with Prettier
+    '@typescript-eslint/prefer-nullish-coalescing': 'error',
     'object-curly-newline': [
       'error',
       {
