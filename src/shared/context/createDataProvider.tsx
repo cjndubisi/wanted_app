@@ -5,9 +5,9 @@ type DispatchAction<T extends Reducer<any, any>, S> = (a: Dispatch<ReducerAction
 export default <T extends Reducer<S, any>, A extends DispatchAction<T, ReturnType<A>>, S>(
   reducer: T,
   actions: A,
-  defaultValue: ReducerState<T>,
+  defaultValue: ReducerState<T>
 ) => {
-  type ContextType = ReturnType<A> & ReducerState<T>;
+  type ContextType = ReturnType<A> & { state: ReducerState<T> };
   const Context = React.createContext<ContextType>((undefined as any) as ContextType);
 
   const Provider = ({ children }: any) => {
@@ -17,7 +17,7 @@ export default <T extends Reducer<S, any>, A extends DispatchAction<T, ReturnTyp
     return (
       <Context.Provider
         value={{
-          ...state,
+          state,
           ...boundActions,
         }}
       >

@@ -18,13 +18,17 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
     headerShown: Platform.OS != 'web',
   });
 
-  const { signUpWithEmail } = React.useContext(AuthContext);
+  const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
 
   const signUp = async () => {
     const errors: FormErrorState = formConfig.reduce((acc, next) => {
-      acc[next.key] = next.validation(info[next.key] ?? '');
+      const error = next.validation(info[next.key] ?? '');
+      // update empty object only if error exist
+      if (error !== '') {
+        acc[next.key] = error;
+      }
       return acc;
     }, {});
 
@@ -36,7 +40,7 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
     let request = info;
     delete request.confirm_password;
 
-    signUpWithEmail(request);
+    await signUpWithEmail(request);
   };
 
   return (
@@ -64,13 +68,12 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
             </View>
             <Input
               key={input.key}
-              // placeholder={input.placeholder}
               secureTextEntry={input.key.indexOf('password') !== -1}
               onChangeText={(text: string) => {
                 setInfo({ ...info, [input.key]: text });
                 setFormError({ ...formError, [input.key]: '' });
               }}
-              value={info[input.key]}
+              value={info[input.key] || ''}
             />
           </View>
         ))}
