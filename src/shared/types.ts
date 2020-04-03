@@ -1,5 +1,5 @@
 export interface TextProp {
-  bold?: 0 | 1;
+  bold?: boolean;
 }
 
 export type ButtonProps = {

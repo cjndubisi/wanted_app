@@ -57,7 +57,7 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
                 flexDirection: 'row',
               }}
             >
-              <Label bold={1}>{input.placeholder}</Label>
+              <Label bold>{input.placeholder}</Label>
               <InputError key={`error_${input.key}`} hasError={!!formError[input.key]?.length}>
                 {formError[input.key]}
               </InputError>
