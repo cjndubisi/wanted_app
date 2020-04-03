@@ -5,7 +5,7 @@ import { RootStackParamList } from '../../../router';
 import { User } from '../../../shared/api/types';
 import Button from '../../../shared/components/Button';
 import { AuthContext } from '../../../shared/context/AuthContext';
-import { Container, H1, Label, Text } from '../../../shared/styled';
+import { Container, H1, InputCaption, Label, Text } from '../../../shared/styled';
 import formConfig from './formConfig';
 import { Input, InputError } from './styled';
 
@@ -21,6 +21,8 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
+  // To prevent rendering page, as cannot dispatch { error: null } to contect from here
+  const [showingAPIError, setShowingAPIError] = useState<boolean>(false);
 
   const signUp = async () => {
     const errors: FormErrorState = formConfig.reduce((acc, next) => {
@@ -37,11 +39,28 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
     }
 
     // sign up
-    let request = info;
+    let request = { ...info };
     delete request.confirm_password;
 
+    setShowingAPIError(false);
     await signUpWithEmail(request);
   };
+
+  if (state.error && !showingAPIError) {
+    const error = state.error;
+    let viewError = {};
+    Object.keys(error).forEach((key) => {
+      // does the key match any form field
+      if (info[key] !== undefined) {
+        viewError[key] = error[key][0];
+      }
+    });
+
+    if (Object.keys(viewError).length !== 0) {
+      setFormError({ ...formError, ...viewError });
+    }
+    setShowingAPIError(true);
+  }
 
   return (
     <Container style={{ marginTop: 44 }}>
@@ -75,6 +94,11 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
               }}
               value={info[input.key] || ''}
             />
+            {input.key === 'password' ? (
+              <InputCaption>
+                {'Requires at least an Uppercase letter, a symbol and a number'}
+              </InputCaption>
+            ) : null}
           </View>
         ))}
         <Button

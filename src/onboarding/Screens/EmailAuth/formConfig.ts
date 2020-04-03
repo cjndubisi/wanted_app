@@ -3,7 +3,7 @@ export default [
     placeholder: 'First Name',
     key: 'first_name',
     validation: (value): string => {
-      const firstValid = value.length > 3;
+      const firstValid = value.length > 2;
       return firstValid ? '' : 'First name is too short';
     },
   },
@@ -11,7 +11,7 @@ export default [
     placeholder: 'Last Name',
     key: 'last_name',
     validation: (value): string => {
-      const firstValid = value.length > 3;
+      const firstValid = value.length > 2;
       return firstValid ? '' : 'Last name is too short';
     },
   },

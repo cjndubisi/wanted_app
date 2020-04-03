@@ -36,6 +36,12 @@ export const Label = styled(Text)`
   font-size: 12px;
 `;
 
+export const InputCaption = styled(Text)`
+  margin-top: 4px;
+  font-size: 10px;
+  color: gray;
+`;
+
 export const Button = styled.TouchableOpacity<{ backgroundColor: string }>`
   align-items: center;
   justify-content: center;

@@ -32,11 +32,18 @@ const authReducer: AuthReducer = (prevState, action) => {
         user: action.payload.user,
         user_token: action.payload.user_token,
         isLoading: false,
+        error: undefined,
       };
     case AuthTypes.LOADING:
       return {
         ...prevState,
         isLoading: true,
+        error: undefined,
+      };
+    case AuthTypes.AUTH_FAILURE:
+      return {
+        ...prevState,
+        error: action.payload,
       };
     default:
       return prevState;
@@ -60,7 +67,7 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
     } catch (error) {
       dispatch({
         type: AuthTypes.AUTH_FAILURE,
-        payload: error,
+        payload: JSON.parse(error.message),
       });
     }
   },

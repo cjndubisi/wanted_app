@@ -11,11 +11,12 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
     body: JSON.stringify(user),
   });
 
-  if (!response.ok) {
-    throw new Error(response.statusText);
-  }
-
   const json = await response.json();
+  if (!response.ok) {
+    const errors = json.errors;
+
+    throw new Error(JSON.stringify(errors));
+  }
 
   return json;
 };
