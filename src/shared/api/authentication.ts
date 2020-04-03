@@ -1,10 +1,10 @@
 import { RegisterResponse, User } from './types';
 
-// const API_URL = 'https://wanted-be.herokuapp.com/v1';
-const API_URL = 'http://localhost:3000/v1';
+const API_URL = 'https://wanted-be.herokuapp.com/v1';
+// const API_URL = 'http://localhost:3000/v1';
 
+// eslint-disable-next-line import/prefer-default-export
 export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
-  console.log(user, 'user');
   const response = await fetch(`${API_URL}${'/users'}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -19,5 +19,3 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
 
   return json;
 };
-
-export const login = async (crede) => {};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 import { TextProp } from './types';
 
@@ -20,16 +20,13 @@ export const Title = styled(H1)`
   text-align: center;
 `;
 
-const FText = styled.Text``;
-const FilterText = ({
-  bold,
-  ...rest
-}: {
-  bold: boolean;
+const FText = styled.Text<TextProp>``;
+const FilterText: FunctionComponent<TextProp> = ({ bold, ...rest }: TextProp) => (
   // eslint-disable-next-line react/jsx-props-no-spreading
-}) => <FText {...rest} />;
+  <FText {...rest} />
+);
 
-export const Text = styled(FilterText)<TextProp>`
+export const Text = styled(FilterText)<Pick<TextProp, 'bold'>>`
   color: black;
   margin-bottom: 4px;
   font-weight: ${(props) => (props.bold ? 'bold' : 'regular')};
