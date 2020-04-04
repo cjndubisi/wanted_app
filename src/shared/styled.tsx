@@ -7,8 +7,9 @@ export const Container = styled.View`
   display: flex;
   flex: 1;
   flex-direction: column;
-  margin: 20px 20px;
   justify-content: space-between;
+  align-self: center;
+  max-width: 467px;
 `;
 
 export const H1 = styled.Text`

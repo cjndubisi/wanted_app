@@ -3,16 +3,17 @@ import React, { useState } from 'react';
 import { Platform, View } from 'react-native';
 import { RootStackParamList } from '../../../router';
 import { User } from '../../../shared/api/types';
-import Button from '../../../shared/components/Button';
+import { ActivityLoader, Button } from '../../../shared/components';
 import { AuthContext } from '../../../shared/context/AuthContext';
 import { Container, H1, InputCaption, Label, Text } from '../../../shared/styled';
 import formConfig from './formConfig';
-import { Input, InputError } from './styled';
+import { ErrorLabel, Input } from './styled';
 
 type SpashNavigationProp = StackNavigationProp<RootStackParamList, 'EmailAuth'>;
 type FormState = Partial<User & { password: string; confirm_password: string }>;
 type FormErrorState = FormState;
 
+const isWeb = Platform.OS == 'web';
 export default ({ navigation }: { navigation: SpashNavigationProp }) => {
   navigation.setOptions({
     headerShown: Platform.OS != 'web',
@@ -26,7 +27,7 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
 
   const signUp = async () => {
     const errors: FormErrorState = formConfig.reduce((acc, next) => {
-      const error = next.validation(info[next.key] ?? '');
+      const error = next.validation(info);
       // update empty object only if error exist
       if (error !== '') {
         acc[next.key] = error;
@@ -45,10 +46,13 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
     setShowingAPIError(false);
     await signUpWithEmail(request);
   };
+  if (state.isSignedIn) {
+    navigation.navigate('Home');
+  }
 
   if (state.error && !showingAPIError) {
     const error = state.error;
-    let viewError = {};
+    let viewError = { other: '' };
     Object.keys(error).forEach((key) => {
       // does the key match any form field
       if (info[key] !== undefined) {
@@ -56,20 +60,23 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
       }
     });
 
-    if (Object.keys(viewError).length !== 0) {
-      setFormError({ ...formError, ...viewError });
+    if (Object.keys(viewError).length === 0) {
+      viewError.other = error?.[0] ?? error.message;
     }
+    setFormError({ ...formError, ...viewError });
+    // Prevent render cause by setFormError
     setShowingAPIError(true);
   }
 
   return (
-    <Container style={{ marginTop: 44 }}>
-      <View>
+    <Container>
+      <ActivityLoader animating={state.isLoading && !isWeb} />
+      <View style={{ margin: 20, marginTop: 44 }}>
         <View style={{ marginBottom: 20, marginTop: 20 }}>
           <H1>Wanted</H1>
           <Text>Create an account buy and sell services, product, jobs and more.</Text>
         </View>
-
+        <ErrorLabel>{}</ErrorLabel>
         {formConfig.map((input) => (
           <View style={{ marginBottom: 12 }} key={`input_${input.key}`}>
             <View
@@ -81,9 +88,7 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
               }}
             >
               <Label bold>{input.placeholder}</Label>
-              <InputError key={`error_${input.key}`} hasError={!!formError[input.key]?.length}>
-                {formError[input.key]}
-              </InputError>
+              <ErrorLabel key={`error_${input.key}`}>{formError[input.key]}</ErrorLabel>
             </View>
             <Input
               key={input.key}

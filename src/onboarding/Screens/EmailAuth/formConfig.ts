@@ -2,41 +2,43 @@ export default [
   {
     placeholder: 'First Name',
     key: 'first_name',
-    validation: (value): string => {
-      const firstValid = value.length > 2;
+    validation: (form): string => {
+      const firstValid = form.first_name?.length > 2;
       return firstValid ? '' : 'First name is too short';
     },
   },
   {
     placeholder: 'Last Name',
     key: 'last_name',
-    validation: (value): string => {
-      const firstValid = value.length > 2;
+    validation: (form): string => {
+      const firstValid = form.last_name?.length > 2;
       return firstValid ? '' : 'Last name is too short';
     },
   },
   {
     placeholder: 'Email',
     key: 'email',
-    validation: (value): string => {
-      const emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
+    validation: (form): string => {
+      const emailValid = form.email?.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
       return emailValid ? '' : 'Invalid email';
     },
   },
   {
     placeholder: 'Password',
     key: 'password',
-    validation: (value): string => {
-      const passwordValid = value.length >= 6;
+    validation: (form): string => {
+      const passwordValid = form.password?.length >= 6;
       return passwordValid ? '' : 'Password is too short';
     },
   },
   {
     placeholder: 'Confirm Passwod',
     key: 'confirm_password',
-    validation: (value): string => {
-      const passwordValid = value.length > 6;
-      return passwordValid ? '' : 'Password does not match';
+    validation: (form): string => {
+      if (form.password !== form.confirm_password) {
+        return 'Password does not match';
+      }
+      return '';
     },
   },
 ];

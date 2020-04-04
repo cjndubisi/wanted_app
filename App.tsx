@@ -9,9 +9,10 @@ import { Linking } from 'expo';
 import React from 'react';
 import { AsyncStorage, Platform } from 'react-native';
 import 'react-native-gesture-handler'; // leave at the top of the file (https://reactnavigation.org/docs/getting-started)
+import Home from './src/Home';
 import OnboardingStack from './src/onboarding';
 
-const SCREENS = { OnboardingStack: { component: OnboardingStack } };
+const SCREENS = { OnboardingStack: { component: OnboardingStack }, Home: { component: Home } };
 type RootStackParamList = {
   OnboardingStack: undefined;
 } & {

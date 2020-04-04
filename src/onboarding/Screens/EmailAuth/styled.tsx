@@ -1,21 +1,9 @@
-import React, { FunctionComponent } from 'react';
 import styled from 'styled-components/native';
 
-const Text = styled.Text``;
-interface InputErrorProp {
-  hasError: boolean;
-}
-const FilterInputError: FunctionComponent<InputErrorProp> = ({
-  hasError,
-  ...rest
-}: InputErrorProp) => (
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  <Text {...rest} />
-);
-export const InputError = styled(FilterInputError)`
+export const ErrorLabel = styled.Text`
   font-size: 12px;
   color: red;
-  height: ${(props) => (props.hasError ? 13 : 0)}px;
+  height: 13px;
   margin-bottom: 6px;
 `;
 

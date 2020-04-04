@@ -1,13 +1,16 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
+import { AsyncStorage } from 'react-native';
 import { register } from '../api/authentication';
 import { User } from '../api/types';
 import createDataContext from './createDataProvider';
+const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';
 
 interface State {
   user: User;
   isLoading: boolean;
   auth_token: string;
   error: any;
+  isSignedIn: boolean;
 }
 
 type Action = {
@@ -16,6 +19,7 @@ type Action = {
 };
 
 enum AuthTypes {
+  INITIALIZATION = 'INITIALIZATION',
   SIGNUP_SUCCESS = 'SIGNUP_SUCCESS',
   AUTH_SUCCESS = 'AUTH_SUCCESS',
   AUTH_FAILURE = 'AUTH_FAILURE',
@@ -26,11 +30,18 @@ type AuthReducer = Reducer<State, Action>;
 
 const authReducer: AuthReducer = (prevState, action) => {
   switch (action.type) {
+    case AuthTypes.INITIALIZATION:
+      return {
+        ...prevState,
+        user_token: action.payload,
+        isSignedIn: !!action.payload,
+      };
     case AuthTypes.SIGNUP_SUCCESS:
       return {
         ...prevState,
         user: action.payload.user,
         user_token: action.payload.user_token,
+        isSignedIn: true,
         isLoading: false,
         error: undefined,
       };
@@ -43,6 +54,7 @@ const authReducer: AuthReducer = (prevState, action) => {
     case AuthTypes.AUTH_FAILURE:
       return {
         ...prevState,
+        isLoading: false,
         error: action.payload,
       };
     default:
@@ -51,17 +63,25 @@ const authReducer: AuthReducer = (prevState, action) => {
 };
 
 const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
+  init: async () => {
+    await AsyncStorage.clear();
+    const token = await AsyncStorage.getItem(AUTH_USER_TOKEN_KEY);
+    dispatch({ type: AuthTypes.INITIALIZATION, payload: token });
+  },
   signUpWithEmail: async (info: Partial<User & { password: string }>) => {
     dispatch({ type: AuthTypes.LOADING });
 
     const request = info;
     try {
-      const response = await register(request);
+      const { user, auth_token, ...rest } = await register(request);
+
+      await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
+
       dispatch({
         type: AuthTypes.SIGNUP_SUCCESS,
         payload: {
-          user: response.data,
-          user_token: response.auth_token,
+          user,
+          user_token: auth_token,
         },
       });
     } catch (error) {
@@ -80,6 +100,7 @@ const INITIAL_STATE = {
   auth_token: undefined,
   isLoading: false,
   error: null,
+  isSignedIn: false,
 };
 
 const { Provider, Context } = createDataContext<AuthReducer, DispatchAction, State>(

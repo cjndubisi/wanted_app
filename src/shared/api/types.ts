@@ -6,7 +6,7 @@ export type User = {
 };
 
 export type RegisterResponse = {
-  data: User;
+  user: User;
   message: string;
   auth_token: string;
 };
