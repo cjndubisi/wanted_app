@@ -63,11 +63,6 @@ const authReducer: AuthReducer = (prevState, action) => {
 };
 
 const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
-  init: async () => {
-    await AsyncStorage.clear();
-    const token = await AsyncStorage.getItem(AUTH_USER_TOKEN_KEY);
-    dispatch({ type: AuthTypes.INITIALIZATION, payload: token });
-  },
   signUpWithEmail: async (info: Partial<User & { password: string }>) => {
     dispatch({ type: AuthTypes.LOADING });
 

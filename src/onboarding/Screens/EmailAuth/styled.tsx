@@ -11,7 +11,7 @@ export const Input = styled.TextInput`
   height: 40px;
   color: black;
   padding-left: 10px;
-  padding-right: 10;
+  padding-right: 10px;
   font-size: 14px;
   border-radius: 5px;
   background-color: white;

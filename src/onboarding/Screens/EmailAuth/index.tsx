@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useLayoutEffect, useState } from 'react';
 import { Platform, View } from 'react-native';
 import { RootStackParamList } from '../../../router';
 import { User } from '../../../shared/api/types';
@@ -15,9 +15,9 @@ type FormErrorState = FormState;
 
 const isWeb = Platform.OS == 'web';
 export default ({ navigation }: { navigation: SpashNavigationProp }) => {
-  navigation.setOptions({
-    headerShown: Platform.OS != 'web',
-  });
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: Platform.OS != 'web' });
+  }, [navigation]);
 
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});

@@ -15,3 +15,5 @@ ios/Pods/*
 # macOS
 .DS_Store
 .idea
+*.log
+coverage/

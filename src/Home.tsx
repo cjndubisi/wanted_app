@@ -9,7 +9,8 @@ type Prop = {
 };
 
 export default ({ navigation }: Prop) => {
-  navigation.setOptions({ headerShown: false });
-
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
   return <Container style={{ margin: 20 }}></Container>;
 };

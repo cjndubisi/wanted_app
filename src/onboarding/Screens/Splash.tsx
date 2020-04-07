@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React from 'react';
+import React, { useLayoutEffect } from 'react';
 import { RootStackParamList } from '../../router';
 import Button from '../../shared/components/Button';
 import { AuthContext } from '../../shared/context/AuthContext';
@@ -11,7 +11,10 @@ type Prop = {
 };
 
 export default ({ navigation }: Prop) => {
-  navigation.setOptions({ headerShown: false });
+  useLayoutEffect(() => {
+    navigation.setOptions({ headerShown: false });
+  }, [navigation]);
+  
   const { state } = React.useContext(AuthContext);
   if (state.isSignedIn) {
     navigation.navigate('Home');

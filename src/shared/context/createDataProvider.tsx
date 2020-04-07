@@ -1,4 +1,4 @@
-import React, { Dispatch, Reducer, ReducerAction, ReducerState, useEffect, useReducer } from 'react';
+import React, { Dispatch, Reducer, ReducerAction, ReducerState, useReducer } from 'react';
 
 type DispatchAction<T extends Reducer<any, any>, S> = (a: Dispatch<ReducerAction<T>>) => S;
 var iscalled = false;
@@ -20,20 +20,13 @@ export default <
 
   const Provider = ({ children }: any) => {
     const [state, dispatch] = useReducer(reducer, defaultValue);
-    const { init, ...rest } = actions(dispatch);
-    if (init) {
-      // Call Provider initialization code
-      useEffect(() => {
-        const setup = async () => await init();
-        setup();
-      }, []);
-    }
+    const bindingActions = actions(dispatch);
 
     return (
       <Context.Provider
         value={{
           state,
-          ...rest,
+          ...bindingActions,
         }}
       >
         {children}
