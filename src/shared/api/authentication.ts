@@ -1,7 +1,7 @@
 import { RegisterResponse, User } from './types';
 
-const API_URL = 'https://wanted-be.herokuapp.com/v1';
-// const API_URL = 'http://localhost:3000/v1';
+// const API_URL = 'https://wanted-be.herokuapp.com/v1';
+const API_URL = 'http://localhost:3000/v1';
 
 // eslint-disable-next-line import/prefer-default-export
 export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
