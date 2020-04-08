@@ -4,9 +4,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "workspaces": [
-    "app",
-    "web",
-    "common"
+    "packages/*"
   ],
   "private": true
 }
