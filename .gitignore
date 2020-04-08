@@ -11,9 +11,10 @@ web-build/
 web-report/
 
 .env.*
-ios/Pods/*
+**/ios/Pods/*
 # macOS
 .DS_Store
 .idea
 *.log
 coverage/
+node_modules
