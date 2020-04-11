@@ -12,18 +12,18 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const native_1 = require("@react-navigation/native");
+const core_1 = require("@react-navigation/core");
 const stack_1 = require("@react-navigation/stack");
 const react_native_1 = require("@testing-library/react-native");
 const react_1 = __importDefault(require("react"));
 const react_test_renderer_1 = require("react-test-renderer");
-const __1 = __importDefault(require(".."));
-const AuthContext_1 = require("../../../../context/AuthContext");
+const EmailAuth_1 = __importDefault(require("../EmailAuth"));
+const AuthContext_1 = require("../../context/AuthContext");
 const withNavigation = ({ screens = {}, }) => {
     return class extends react_1.default.Component {
         render() {
             const Stack = stack_1.createStackNavigator();
-            return (react_1.default.createElement(native_1.NavigationContainer, null,
+            return (react_1.default.createElement(core_1.BaseNavigationContainer, null,
                 react_1.default.createElement(Stack.Navigator, null, Object.keys(screens).map((name) => (react_1.default.createElement(Stack.Screen, { key: name, name: name, component: screens[name].component }))))));
         }
     };
@@ -43,13 +43,13 @@ const withProviders = (Component) => {
     };
 };
 it('renders correctly', () => {
-    const EmailNavigation = withNavigation({ screens: { EmailAuth: { component: __1.default } } });
+    const EmailNavigation = withNavigation({ screens: { EmailAuth: { component: EmailAuth_1.default } } });
     const Auth = withProviders(EmailNavigation);
     const tree = react_test_renderer_1.create(react_1.default.createElement(Auth, null)).toJSON();
     expect(tree).toMatchSnapshot();
 });
 test('cannot submit with empty fields', () => __awaiter(void 0, void 0, void 0, function* () {
-    const screens = { screens: { EmailAuth: { component: __1.default } } };
+    const screens = { screens: { EmailAuth: { component: EmailAuth_1.default } } };
     const { findByLabelText, getByTitle } = renderWithNavigation(screens);
     react_native_1.fireEvent.press(getByTitle(/Sign up with email/i));
     yield expect(findByLabelText('Last name is too short')).toBeTruthy();
@@ -62,7 +62,7 @@ test('test can sign up', () => __awaiter(void 0, void 0, void 0, function* () {
         password: 'random',
         confirm_password: 'random',
     };
-    const screens = { screens: { EmailAuth: { component: __1.default } } };
+    const screens = { screens: { EmailAuth: { component: EmailAuth_1.default } } };
     const { getByLabelText } = renderWithNavigation(screens);
     const keys = Object.keys(formInput).reduce((acc, next) => {
         acc[next] = next;

@@ -8,35 +8,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
-    result["default"] = mod;
-    return result;
-};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const native_1 = require("@react-navigation/native");
 const stack_1 = require("@react-navigation/stack");
-const react_1 = __importStar(require("react"));
-const react_native_1 = require("react-native");
-require("react-native-gesture-handler"); // leave at the top of the file (https://reactnavigation.org/docs/getting-started)
-const react_native_screens_1 = require("react-native-screens");
+const react_1 = __importDefault(require("react"));
 const AuthContext_1 = require("./context/AuthContext");
-const Home_1 = __importDefault(require("./screens/Home"));
-const onboarding_1 = __importDefault(require("./screens/onboarding"));
-const ResolveAuthScreen_1 = __importDefault(require("./screens/ResolveAuthScreen"));
-react_native_screens_1.enableScreens();
-const SCREENS = {
-    ResolveAuth: { component: ResolveAuthScreen_1.default },
-    OnboardingFlow: { component: onboarding_1.default },
-    Home: { component: Home_1.default },
-};
+const router_1 = require("./router");
+const react_native_1 = require("react-native");
 const Stack = stack_1.createStackNavigator();
-function App() {
+exports.default = () => {
     // Start: WEBURL history and restore initial state on reload
     const containerRef = react_1.default.useRef();
     const { getInitialState } = native_1.useLinking(containerRef, {
@@ -44,23 +27,23 @@ function App() {
         config: {
             Root: {
                 path: '',
-                initialRouteName: 'OnboardingFlow',
-                screens: Object.keys(SCREENS).reduce((acc, name) => {
+                initialRouteName: 'Splash',
+                screens: Object.keys(router_1.Routes).reduce((acc, name) => {
                     // Convert screen names such as SimpleStack to kebab case (simple-stack)
                     acc[name] = name
                         .replace(/([A-Z]+)/g, '-$1')
                         .replace(/^-/, '')
                         .toLowerCase();
                     return acc;
-                }, { OnboardingFlow: '' }),
+                }, { Splash: '' }),
             },
         },
     });
     const NAVIGATION_PERSISTENCE_KEY = 'NAVIGATION_STATE';
     const [isReady, setIsReady] = react_1.default.useState(false);
     const [initialState, setInitialState] = react_1.default.useState();
-    react_1.useEffect(() => {
-        const restoreState = () => __awaiter(this, void 0, void 0, function* () {
+    react_1.default.useEffect(() => {
+        const restoreState = () => __awaiter(void 0, void 0, void 0, function* () {
             try {
                 let state = yield getInitialState();
                 if (react_native_1.Platform.OS !== 'web' && state === undefined) {
@@ -83,6 +66,5 @@ function App() {
     // END: WEBURL
     return (react_1.default.createElement(AuthContext_1.AuthProvider, null,
         react_1.default.createElement(native_1.NavigationContainer, { ref: containerRef, initialState: initialState },
-            react_1.default.createElement(Stack.Navigator, { screenOptions: { headerShown: false } }, Object.keys(SCREENS).map((name) => (react_1.default.createElement(Stack.Screen, { key: name, name: name, component: SCREENS[name].component })))))));
-}
-exports.default = App;
+            react_1.default.createElement(Stack.Navigator, { screenOptions: { headerShown: false } }, Object.keys(router_1.Routes).map((name) => (react_1.default.createElement(Stack.Screen, { key: name, name: name, component: router_1.Routes[name].component })))))));
+};

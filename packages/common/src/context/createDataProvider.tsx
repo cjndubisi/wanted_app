@@ -12,7 +12,7 @@ export default <
   actions: A,
   defaultValue: ReducerState<T>
 ) => {
-  type ContextType = Omit<ReturnType<A> & { init?: () => Promise<void> }, 'init'> & {
+  type ContextType = ReturnType<A> & {
     state: ReducerState<T>;
   };
 

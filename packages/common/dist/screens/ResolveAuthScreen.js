@@ -11,20 +11,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = require("react");
 const AuthContext_1 = require("../context/AuthContext");
-exports.default = ({ navigation }) => {
+exports.default = () => {
     const { state, tryToLogin } = react_1.useContext(AuthContext_1.AuthContext);
     const { isLoading, isSignedIn } = state;
     react_1.useEffect(() => {
         const login = () => __awaiter(void 0, void 0, void 0, function* () {
             yield tryToLogin();
             if (!isSignedIn) {
-                navigation.navigate('OnboardingFlow');
+                // navigate to splash
             }
         });
         login();
     }, []);
     if (isSignedIn) {
-        navigation.navigate('Home');
+        // navigate home
     }
     return null;
 };

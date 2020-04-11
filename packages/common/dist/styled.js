@@ -40,7 +40,7 @@ const FilterText = (_a) => {
     react_1.default.createElement(FText, Object.assign({}, rest)));
 };
 exports.Text = native_1.default(FilterText) `
-  color: black;
+  color: brown;
   margin-bottom: 4px;
   /* font-weight: ${(props) => (props.bold ? 'bold' : 'regular')}; */
 `;

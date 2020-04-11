@@ -1,32 +1,17 @@
 import {
-  InitialState,
   NavigationContainer,
   NavigationContainerRef,
   useLinking,
+  InitialState,
 } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import React, { useEffect } from 'react';
-import { AsyncStorage, Platform } from 'react-native';
-import 'react-native-gesture-handler'; // leave at the top of the file (https://reactnavigation.org/docs/getting-started)
-import { enableScreens } from 'react-native-screens';
+import React from 'react';
 import { AuthProvider } from './context/AuthContext';
-import Home from './screens/Home';
-import OnboardingFlow from './screens/onboarding';
-import ResolveAuth from './screens/ResolveAuthScreen';
+import { RootStackParamList, Routes as Screens } from './router';
+import { Platform, AsyncStorage } from 'react-native';
 
-enableScreens();
-const SCREENS = {
-  ResolveAuth: { component: ResolveAuth },
-  OnboardingFlow: { component: OnboardingFlow },
-  Home: { component: Home },
-};
-type RootStackParamList = {
-  OnboardingFlow: undefined;
-} & {
-  [P in keyof typeof SCREENS]: undefined;
-};
 const Stack = createStackNavigator<RootStackParamList>();
-export default function App() {
+export default () => {
   // Start: WEBURL history and restore initial state on reload
   const containerRef = React.useRef<NavigationContainerRef>();
   const { getInitialState } = useLinking(containerRef, {
@@ -34,8 +19,8 @@ export default function App() {
     config: {
       Root: {
         path: '',
-        initialRouteName: 'OnboardingFlow',
-        screens: Object.keys(SCREENS).reduce<{ [key: string]: string }>(
+        initialRouteName: 'Splash',
+        screens: Object.keys(Screens).reduce<{ [key: string]: string }>(
           (acc, name) => {
             // Convert screen names such as SimpleStack to kebab case (simple-stack)
             acc[name] = name
@@ -45,7 +30,7 @@ export default function App() {
 
             return acc;
           },
-          { OnboardingFlow: '' }
+          { Splash: '' }
         ),
       },
     },
@@ -54,7 +39,7 @@ export default function App() {
 
   const [isReady, setIsReady] = React.useState(false);
   const [initialState, setInitialState] = React.useState<InitialState | undefined>();
-  useEffect(() => {
+  React.useEffect(() => {
     const restoreState = async () => {
       try {
         let state = await getInitialState();
@@ -84,11 +69,11 @@ export default function App() {
     <AuthProvider>
       <NavigationContainer ref={containerRef} initialState={initialState}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {(Object.keys(SCREENS) as (keyof typeof SCREENS)[]).map((name) => (
-            <Stack.Screen key={name} name={name} component={SCREENS[name].component} />
+          {(Object.keys(Screens) as (keyof typeof Screens)[]).map((name) => (
+            <Stack.Screen key={name} name={name} component={Screens[name].component} />
           ))}
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>
   );
-}
+};

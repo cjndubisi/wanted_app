@@ -29,7 +29,7 @@ const FilterText: FunctionComponent<TextProp & TextProps> = ({ bold, ...rest }: 
 );
 
 export const Text = styled(FilterText)`
-  color: black;
+  color: brown;
   margin-bottom: 4px;
   /* font-weight: ${(props) => (props.bold ? 'bold' : 'regular')}; */
 `;

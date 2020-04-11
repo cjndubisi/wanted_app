@@ -1,10 +1,10 @@
-import { NavigationContainer } from '@react-navigation/native';
+import { BaseNavigationContainer } from '@react-navigation/core';
 import { createStackNavigator } from '@react-navigation/stack';
 import { fireEvent, render } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
-import EmailAuth, { FormState } from '..';
-import { AuthProvider } from '../../../../context/AuthContext';
+import EmailAuth, { FormState } from '../EmailAuth';
+import { AuthProvider } from '../../context/AuthContext';
 
 const withNavigation = ({
   screens = {},
@@ -15,13 +15,13 @@ const withNavigation = ({
     render() {
       const Stack = createStackNavigator();
       return (
-        <NavigationContainer>
+        <BaseNavigationContainer>
           <Stack.Navigator>
             {Object.keys(screens).map((name) => (
               <Stack.Screen key={name} name={name} component={screens[name].component} />
             ))}
           </Stack.Navigator>
-        </NavigationContainer>
+        </BaseNavigationContainer>
       );
     }
   };

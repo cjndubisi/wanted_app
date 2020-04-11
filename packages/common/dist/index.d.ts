@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import 'react-native-gesture-handler';
-export default function App(): JSX.Element;
+declare const _default: () => JSX.Element;
+export default _default;

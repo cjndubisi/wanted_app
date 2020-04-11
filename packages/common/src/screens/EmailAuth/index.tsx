@@ -1,24 +1,17 @@
-import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useLayoutEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Platform, View } from 'react-native';
-import { User } from '../../../api/types';
-import { ActivityLoader, Button } from '../../../components';
-import { AuthContext } from '../../../context/AuthContext';
-import { RootStackParamList } from '../../../router';
-import { Container, H1, InputCaption, Label, Text } from '../../../styled';
+import { User } from '../../api/types';
+import { ActivityLoader, Button } from '../../components';
+import { AuthContext } from '../../context/AuthContext';
+import { Container, H1, InputCaption, Label, Text } from '../../styled';
 import formConfig from './formConfig';
 import { ErrorLabel, Input } from './styled';
 
-type SpashNavigationProp = StackNavigationProp<RootStackParamList, 'EmailAuth'>;
 export type FormState = Partial<User & { password: string; confirm_password: string }>;
 export type FormErrorState = FormState;
 
 const isWeb = Platform.OS == 'web';
-export default ({ navigation }: { navigation: SpashNavigationProp }) => {
-  useLayoutEffect(() => {
-    navigation.setOptions({ headerShown: Platform.OS != 'web' });
-  }, [navigation]);
-
+export default () => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
@@ -46,9 +39,6 @@ export default ({ navigation }: { navigation: SpashNavigationProp }) => {
     setShowingAPIError(false);
     await signUpWithEmail(request);
   };
-  if (state.isSignedIn) {
-    navigation.navigate('Home');
-  }
 
   if (state.error && !showingAPIError) {
     const error = state.error;

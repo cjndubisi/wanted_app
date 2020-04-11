@@ -13,8 +13,7 @@
     "outDir": "dist",
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "declaration": true
-    // "strict": true
+    "declaration": true,
   },
 
   "include": ["src"],

@@ -21,17 +21,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importStar(require("react"));
 const react_native_1 = require("react-native");
-const components_1 = require("../../../components");
-const AuthContext_1 = require("../../../context/AuthContext");
-const styled_1 = require("../../../styled");
+const components_1 = require("../../components");
+const AuthContext_1 = require("../../context/AuthContext");
+const styled_1 = require("../../styled");
 const formConfig_1 = __importDefault(require("./formConfig"));
 const styled_2 = require("./styled");
 const isWeb = react_native_1.Platform.OS == 'web';
-exports.default = ({ navigation }) => {
+exports.default = () => {
     var _a;
-    react_1.useLayoutEffect(() => {
-        navigation.setOptions({ headerShown: react_native_1.Platform.OS != 'web' });
-    }, [navigation]);
     const { signUpWithEmail, state } = react_1.default.useContext(AuthContext_1.AuthContext);
     const [info, setInfo] = react_1.useState({});
     const [formError, setFormError] = react_1.useState({});
@@ -55,9 +52,6 @@ exports.default = ({ navigation }) => {
         setShowingAPIError(false);
         yield signUpWithEmail(request);
     });
-    if (state.isSignedIn) {
-        navigation.navigate('Home');
-    }
     if (state.error && !showingAPIError) {
         const error = state.error;
         let viewError = { other: '' };

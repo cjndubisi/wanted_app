@@ -1,4 +1,3 @@
 /// <reference types="react" />
-import { ActivityIndicatorProps } from 'react-native';
-declare const _default: ({ animating }: ActivityIndicatorProps) => JSX.Element;
+declare const _default: ({ animating }: any) => JSX.Element;
 export default _default;

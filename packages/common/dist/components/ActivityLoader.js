@@ -4,11 +4,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const react_1 = __importDefault(require("react"));
-const react_native_1 = require("react-native");
-let width = react_native_1.Dimensions.get('window').width;
-let height = react_native_1.Dimensions.get('window').height;
+const react_native_web_1 = require("react-native-web");
+let width = react_native_web_1.Dimensions.get('window').width;
+let height = react_native_web_1.Dimensions.get('window').height;
 exports.default = ({ animating }) => {
-    return (react_1.default.createElement(react_native_1.View, { style: {
+    return (react_1.default.createElement(react_native_web_1.View, { style: {
             position: 'absolute',
             flex: 1,
             height,
@@ -22,7 +22,7 @@ exports.default = ({ animating }) => {
             left: 0,
             backgroundColor: 'rgba(52, 52, 52, 0.3)',
         } },
-        react_1.default.createElement(react_native_1.View, { style: {
+        react_1.default.createElement(react_native_web_1.View, { style: {
                 backgroundColor: 'white',
                 height: 100,
                 width: 100,
@@ -30,5 +30,5 @@ exports.default = ({ animating }) => {
                 alignItems: 'center',
                 borderRadius: 10,
             } },
-            react_1.default.createElement(react_native_1.ActivityIndicator, { size: 'large', color: 'gray', animating: animating }))));
+            react_1.default.createElement(react_native_web_1.ActivityIndicator, { size: 'large', color: 'gray', animating: animating }))));
 };

@@ -7,14 +7,12 @@ interface State {
     error: any;
     isSignedIn: boolean;
 }
-declare const Provider: ({ children }: any) => JSX.Element, Context: import("react").Context<Pick<{
+declare const Provider: ({ children }: any) => JSX.Element, Context: import("react").Context<{
     tryToLogin: () => Promise<void>;
     signUpWithEmail: (info: Partial<User & {
         password: string;
     }>) => Promise<void>;
 } & {
-    init?: () => Promise<void>;
-}, "tryToLogin" | "signUpWithEmail"> & {
     state: State;
 }>;
 export { Provider as AuthProvider, Context as AuthContext };
