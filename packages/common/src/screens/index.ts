@@ -1,6 +1,6 @@
-import Email from './EmailAuth';
+import EmailAuth from './EmailAuth';
 import Home from './Home';
 import AuthResolver from './ResolveAuthScreen';
 import Splash from './Splash';
 
-export { Email, Home, AuthResolver, Splash };
+export { EmailAuth, Home, AuthResolver, Splash };

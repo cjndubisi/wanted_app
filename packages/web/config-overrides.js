@@ -6,26 +6,22 @@ const resolveApp = (relativePath) => path.resolve(appDirectory, relativePath);
 
 const appIncludes = [
   resolveApp('src'),
+  resolveApp('../common/src'),
   resolveApp('../../node_modules/react-native-gesture-handler/'),
   resolveApp('../../node_modules/react-native-haptic-feedback/'),
   resolveApp('../../node_modules/react-native-vector-icons/'),
   resolveApp('../../node_modules/react-native-screens/'),
 ];
 
-module.exports = async function override(config, env) {
+module.exports = function override(config, env) {
   const __DEV__ = env !== 'production';
 
   config.module.rules[0].include = appIncludes;
   config.module.rules[1] = null;
-  config.module.rules[2].oneOf[0].include = appIncludes;
+  config.module.rules[2].oneOf[1].include = appIncludes;
   config.module.rules[2].oneOf[1].options.plugins = [
     require.resolve('babel-plugin-react-native-web'),
   ].concat(config.module.rules[2].oneOf[1].options.plugins);
-
-  config.module.rules[2].oneOf[1].options.preset = [require.resolve('babel-preset-expo')];
-  // .concat(
-  //   config.module.rules[2].oneOf[1].options.preset
-  // );
 
   config.plugins.push(new webpack.DefinePlugin({ __DEV__ }));
 

@@ -1,6 +1,6 @@
 import { BaseNavigationContainer } from '@react-navigation/core';
 import { createStackNavigator } from '@react-navigation/stack';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent, render, ReactTestInstanceExtended } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
 import EmailAuth, { FormState } from '../EmailAuth';
@@ -33,7 +33,7 @@ const renderWithNavigation = ({ screens = {} }) => {
   return { ...render(<Component />) };
 };
 
-const withProviders = (Component) => {
+const withProviders = (Component: any) => {
   const signUpWithEmail = jest.fn();
 
   return class extends React.Component {
@@ -57,9 +57,9 @@ it('renders correctly', () => {
 
 test('cannot submit with empty fields', async () => {
   const screens = { screens: { EmailAuth: { component: EmailAuth } } };
-  const { findByLabelText, getByTitle } = renderWithNavigation(screens);
+  const { findByLabelText, getByTitle, getByText } = renderWithNavigation(screens);
 
-  fireEvent.press(getByTitle(/Sign up with email/i));
+  fireEvent.press(getByText(/Sign up with email/i));
 
   await expect(findByLabelText('Last name is too short')).toBeTruthy();
 });
@@ -78,13 +78,10 @@ test('test can sign up', async () => {
     acc[next] = next;
     return acc;
   }, {});
-  const elements: { [element: string]: HTMLElement } = Object.keys(formInput).reduce(
-    (acc, name) => {
-      acc[name] = getByLabelText(name);
-      return acc;
-    },
-    {}
-  );
+  const elements = Object.keys(formInput).reduce((acc, name) => {
+    acc[name] = getByLabelText(name);
+    return acc;
+  }, {});
   Object.keys(elements).forEach((item) => {
     fireEvent.changeText(elements[keys.email], formInput[item]);
   });

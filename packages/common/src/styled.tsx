@@ -4,12 +4,12 @@ import styled from 'styled-components/native';
 import { TextProp } from './types';
 
 export const Container = styled.View`
-  display: flex;
-  flex: 1;
   flex-direction: column;
   justify-content: space-between;
   align-self: center;
+  min-height: 100%;
   max-width: 467px;
+  background-color: #fff7e6;
 `;
 
 export const H1 = styled.Text`
@@ -29,9 +29,9 @@ const FilterText: FunctionComponent<TextProp & TextProps> = ({ bold, ...rest }: 
 );
 
 export const Text = styled(FilterText)`
-  color: brown;
+  color: black;
   margin-bottom: 4px;
-  /* font-weight: ${(props) => (props.bold ? 'bold' : 'regular')}; */
+  ${(props) => (props.bold ? 'font-weight:bold;' : '')};
 `;
 
 export const Label = styled(Text)`

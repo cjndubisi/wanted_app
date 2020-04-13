@@ -1,6 +1,5 @@
 {
   "name": "Wanted",
-  "displayName": "Wanted",
   "expo": {
     "platforms": ["web"]
   }

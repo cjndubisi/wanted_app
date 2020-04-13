@@ -8,7 +8,7 @@ import formConfig from './formConfig';
 import { ErrorLabel, Input } from './styled';
 
 export type FormState = Partial<User & { password: string; confirm_password: string }>;
-export type FormErrorState = FormState;
+export type FormErrorState = { [T in keyof FormState]: string };
 
 const isWeb = Platform.OS == 'web';
 export default () => {
@@ -23,10 +23,10 @@ export default () => {
       const error = next.validation(info);
       // update empty object only if error exist
       if (error !== '') {
-        acc[next.key] = error;
+        acc[next.key as keyof FormErrorState] = error;
       }
       return acc;
-    }, {});
+    }, {} as FormErrorState);
 
     if (Object.keys(errors).length > 0) {
       return setFormError(errors);

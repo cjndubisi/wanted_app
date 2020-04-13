@@ -1,16 +1,9 @@
-import {
-  NavigationContainer,
-  NavigationContainerRef,
-  useLinking,
-  InitialState,
-} from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainerRef, useLinking, InitialState } from '@react-navigation/native';
 import React from 'react';
 import { AuthProvider } from './context/AuthContext';
-import { RootStackParamList, Routes as Screens } from './router';
+import { Routes as ROUTES, Stack } from './router';
 import { Platform, AsyncStorage } from 'react-native';
 
-const Stack = createStackNavigator<RootStackParamList>();
 export default () => {
   // Start: WEBURL history and restore initial state on reload
   const containerRef = React.useRef<NavigationContainerRef>();
@@ -20,7 +13,7 @@ export default () => {
       Root: {
         path: '',
         initialRouteName: 'Splash',
-        screens: Object.keys(Screens).reduce<{ [key: string]: string }>(
+        screens: Object.keys(ROUTES).reduce<{ [key: string]: string }>(
           (acc, name) => {
             // Convert screen names such as SimpleStack to kebab case (simple-stack)
             acc[name] = name
@@ -67,13 +60,13 @@ export default () => {
 
   return (
     <AuthProvider>
-      <NavigationContainer ref={containerRef} initialState={initialState}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          {(Object.keys(Screens) as (keyof typeof Screens)[]).map((name) => (
-            <Stack.Screen key={name} name={name} component={Screens[name].component} />
+      <Stack.NavigationContainer initialState={initialState}>
+        <Stack.Navigator initialRouteName={'Splash'} screenOptions={{ headerShown: false }}>
+          {(Object.keys(ROUTES) as (keyof typeof ROUTES)[]).map((name) => (
+            <Stack.Screen key={name} name={name} exact {...ROUTES[name]} />
           ))}
         </Stack.Navigator>
-      </NavigationContainer>
+      </Stack.NavigationContainer>
     </AuthProvider>
   );
 };

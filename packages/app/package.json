@@ -8,30 +8,6 @@
     "test": "jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
-  "jest": {
-    "setupFilesAfterEnv": [
-      "./jestSetup.js",
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
-    ],
-    "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/fileTransformer.js"
-    },
-    "preset": "@testing-library/react-native",
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ],
-    "transform": {
-      "^.+\\.[t|j]sx?$": "babel-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "jsx",
-      "node"
-    ]
-  },
   "dependencies": {
     "@wanted/common": "0.1.0",
     "react": "^16.13.1",
