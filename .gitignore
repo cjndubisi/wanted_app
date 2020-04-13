@@ -10,6 +10,7 @@ npm-debug.*
 web-build/
 web-report/
 
+dist
 .env.*
 **/ios/Pods/*
 # macOS
