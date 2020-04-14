@@ -1,5 +1,5 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
-import { AsyncStorage } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import { register } from '../api';
 import { User } from '../api/types';
 import createDataContext from './createDataProvider';
@@ -72,7 +72,7 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
 
     const request = info;
     try {
-      const { user, auth_token, ...rest } = await register(request);
+      const { user, auth_token } = await register(request);
 
       await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
 

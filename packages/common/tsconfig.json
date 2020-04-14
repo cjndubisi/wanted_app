@@ -13,8 +13,12 @@
     "outDir": "dist",
     "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "declaration": true
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["index.web", "index.native", "*.web", "*.native", "*"]
+    }
   },
   "include": ["src"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "exclude": ["node_modules", "**/*.spec.(ts|tsx)"]
 }

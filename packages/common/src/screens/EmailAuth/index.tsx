@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Platform, View } from 'react-native';
 import { User } from '../../api/types';
 import { ActivityLoader, Button } from '../../components';
@@ -11,12 +11,18 @@ export type FormState = Partial<User & { password: string; confirm_password: str
 export type FormErrorState = { [T in keyof FormState]: string };
 
 const isWeb = Platform.OS == 'web';
-export default () => {
+export default ({ navigation }) => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
   // To prevent rendering page, as cannot dispatch { error: null } to contect from here
   const [showingAPIError, setShowingAPIError] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (state.isSignedIn) {
+      navigation.navigate('/board');
+    }
+  }, [state.isSignedIn]);
 
   const signUp = async () => {
     const errors: FormErrorState = formConfig.reduce((acc, next) => {

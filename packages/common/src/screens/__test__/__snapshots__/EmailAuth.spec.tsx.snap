@@ -840,7 +840,7 @@ exports[`renders correctly 1`] = `
                   }
                 }
               >
-                EmailAuth
+                /emailAuth
               </Text>
             </View>
           </View>

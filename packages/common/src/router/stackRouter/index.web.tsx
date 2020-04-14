@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-const Screen = (props) => {
+const Screen = ({ component: Component, ...props }) => {
   return (
     <Route
       {...props}
-      render={({ history, ...other }) => {
-        history.navigate = history.push;
-        const navigation = history;
-
-        return <props.component {...other} navigation={navigation} />;
+      render={({ history, ...rest }) => {
+        const navigation = {
+          navigate: history.push,
+          ...history,
+        };
+        return <Component {...rest} navigation={navigation} />;
       }}
     />
   );

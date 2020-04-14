@@ -6,12 +6,13 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "watch": "tsc --watch ",
-    "test": "jest --coverage --maxWorkers=1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/masked-view": "^0.1.7",
     "@react-navigation/core": "^5.3.3",
     "@react-navigation/native": "^5.1.5",
@@ -35,6 +36,7 @@
     "@babel/preset-typescript": "^7.9.0",
     "@testing-library/react": "^10.0.2",
     "@testing-library/react-native": "^5.0.3",
+    "@types/node-fetch": "^2.5.6",
     "@types/react": "~16.9.0",
     "@types/react-native": "~0.60.23",
     "@types/styled-components": "^5.0.1",

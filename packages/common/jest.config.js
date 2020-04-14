@@ -12,7 +12,10 @@ module.exports = {
   },
   modulePaths: ['src'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx', 'node'],
-  transformIgnorePatterns: ['../../node_modules/(?!(react-native)/)'],
+  testPathIgnorePatterns: ['/node_modules/'],
+  transformIgnorePatterns: [
+    'node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*)',
+  ],
   globals: {
     'ts-jest': {
       tsConfig: 'tsconfig.jest.json',

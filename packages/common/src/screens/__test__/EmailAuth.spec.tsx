@@ -1,24 +1,41 @@
+jest.mock('node-fetch');
+
 import { BaseNavigationContainer } from '@react-navigation/core';
 import { createStackNavigator } from '@react-navigation/stack';
-import { fireEvent, render, ReactTestInstanceExtended } from '@testing-library/react-native';
+import { fireEvent, render, prettyPrint, waitForElement, act } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
 import EmailAuth, { FormState } from '../EmailAuth';
 import { AuthProvider } from '../../context/AuthContext';
+import { default as fetcher } from 'node-fetch';
+import Home from '../Home';
+const fetch = (fetcher as any) as jest.Mock;
+const { Response } = jest.requireActual('node-fetch');
+const components = {
+  screens: {
+    EmailAuth: { component: EmailAuth, path: '/emailAuth' },
+    Home: { component: Home, path: '/board' },
+  },
+};
 
 const withNavigation = ({
   screens = {},
 }: {
-  screens: { [component: string]: { component: any } };
+  screens: { [component: string]: { component: any; path: string } };
 }) => {
   return class extends React.Component {
     render() {
       const Stack = createStackNavigator();
+
       return (
         <BaseNavigationContainer>
           <Stack.Navigator>
             {Object.keys(screens).map((name) => (
-              <Stack.Screen key={name} name={name} component={screens[name].component} />
+              <Stack.Screen
+                key={name}
+                name={screens[name].path}
+                component={screens[name].component}
+              />
             ))}
           </Stack.Navigator>
         </BaseNavigationContainer>
@@ -34,12 +51,10 @@ const renderWithNavigation = ({ screens = {} }) => {
 };
 
 const withProviders = (Component: any) => {
-  const signUpWithEmail = jest.fn();
-
   return class extends React.Component {
     render() {
       return (
-        <AuthProvider value={{ signUpWithEmail }}>
+        <AuthProvider>
           <Component />
         </AuthProvider>
       );
@@ -48,7 +63,7 @@ const withProviders = (Component: any) => {
 };
 
 it('renders correctly', () => {
-  const EmailNavigation = withNavigation({ screens: { EmailAuth: { component: EmailAuth } } });
+  const EmailNavigation = withNavigation(components);
   const Auth = withProviders(EmailNavigation);
   const tree = create(<Auth />).toJSON();
 
@@ -56,37 +71,65 @@ it('renders correctly', () => {
 });
 
 test('cannot submit with empty fields', async () => {
-  const screens = { screens: { EmailAuth: { component: EmailAuth } } };
-  const { findByLabelText, getByTitle, getByText } = renderWithNavigation(screens);
+  const { findByLabelText, getByText } = renderWithNavigation(components);
 
   fireEvent.press(getByText(/Sign up with email/i));
 
   await expect(findByLabelText('Last name is too short')).toBeTruthy();
 });
 
-test('test can sign up', async () => {
+test('test cannot sign up with invalid password format', async () => {
   const formInput: FormState = {
     first_name: 'random',
     last_name: 'random',
     email: 'random@random.com',
     password: 'random',
-    confirm_password: 'random',
+    confirm_password: 'random1',
   };
-  const screens = { screens: { EmailAuth: { component: EmailAuth } } };
-  const { getByLabelText } = renderWithNavigation(screens);
-  const keys: { [T in keyof typeof formInput] } = Object.keys(formInput).reduce((acc, next) => {
-    acc[next] = next;
-    return acc;
-  }, {});
+  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
   const elements = Object.keys(formInput).reduce((acc, name) => {
     acc[name] = getByLabelText(name);
     return acc;
   }, {});
   Object.keys(elements).forEach((item) => {
-    fireEvent.changeText(elements[keys.email], formInput[item]);
+    fireEvent.changeText(elements[item], formInput[item]);
   });
+  fireEvent.press(getByText(/Sign up with email/i));
 
-  // expect(getByTestId('title').props.children).toMatch('Home page');
-  // fireEvent.press(getByText(/About page/i));
-  // await expect(findByText('About page')).toBeTruthy();
+  await expect(findByLabelText('Invalid Password format')).toBeTruthy();
+  await expect(findByLabelText('Password does not match')).toBeTruthy();
+});
+
+test('test can sign up', async () => {
+  const body = {
+    user: {
+      id: 1,
+      first_name: 'random',
+      last_name: 'random',
+      email: 'random@random.com',
+    },
+    auth_token: 'faslfuad_random_fasd',
+    message: 'success',
+  };
+  fetch.mockReturnValue(Promise.resolve(new Response(JSON.stringify(body))));
+
+  const formInput: FormState = {
+    first_name: 'random',
+    last_name: 'random',
+    email: 'random@random.com',
+    password: 'R#and0m',
+    confirm_password: 'R#and0m',
+  };
+  const { getByLabelText, getByText, findByText } = renderWithNavigation(components);
+
+  const elements = Object.keys(formInput).reduce((acc, name) => {
+    acc[name] = getByLabelText(name);
+    return acc;
+  }, {});
+  Object.keys(elements).forEach((item) => {
+    fireEvent.changeText(elements[item], formInput[item]);
+  });
+  fireEvent.press(getByText(/Sign up with email/i));
+
+  await expect(findByText(/Board/i)).toBeTruthy();
 });

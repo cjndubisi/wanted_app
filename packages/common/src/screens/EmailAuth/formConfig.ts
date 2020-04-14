@@ -27,8 +27,10 @@ export default [
     placeholder: 'Password',
     key: 'password',
     validation: (form): string => {
-      const passwordValid = form.password?.length >= 6;
-      return passwordValid ? '' : 'Password is too short';
+      const passwordValid = form.password.match(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/
+      );
+      return passwordValid ? '' : 'Invalid Password format';
     },
   },
   {
