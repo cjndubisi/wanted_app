@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { AuthContext } from '../context/AuthContext';
 
-export default () => {
+export default ({ navigation }) => {
   const { state, tryToLogin } = useContext(AuthContext);
   const { isLoading, isSignedIn } = state;
 
@@ -9,7 +9,7 @@ export default () => {
     const login = async () => {
       await tryToLogin();
       if (!isSignedIn) {
-        // navigate to splash
+        navigation.navigate('/');
       }
     };
     login();
