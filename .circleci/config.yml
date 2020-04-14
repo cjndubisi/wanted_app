@@ -1,7 +1,7 @@
 version: 2.1
 jobs:
   node:
-    working_directory: ~/packages/common
+    working_directory: ~/wanted
     docker:
       - image: circleci/node:12
     steps:
@@ -29,7 +29,7 @@ jobs:
           name: jest tests
           command: |
             mkdir -p test-results/jest
-            yarn test --ci
+            yarn workspace '@wanted/common' test --ci
           environment:
             JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
