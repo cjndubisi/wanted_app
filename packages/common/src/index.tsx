@@ -12,7 +12,7 @@ export default () => {
     config: {
       Root: {
         path: '',
-        initialRouteName: 'Splash',
+        initialRouteName: '/authenticating',
         screens: Object.keys(ROUTES).reduce<{ [key: string]: string }>(
           (acc, name) => {
             // Convert screen names such as SimpleStack to kebab case (simple-stack)
@@ -61,7 +61,7 @@ export default () => {
   return (
     <AuthProvider>
       <Stack.NavigationContainer initialState={initialState}>
-        <Stack.Navigator initialRouteName={'Splash'} screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
           {(Object.keys(ROUTES) as (keyof typeof ROUTES)[]).map((name) => (
             <Stack.Screen key={name} name={name} exact {...ROUTES[name]} />
           ))}

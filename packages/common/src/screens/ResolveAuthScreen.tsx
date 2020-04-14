@@ -16,7 +16,7 @@ export default ({ navigation }) => {
   }, []);
 
   if (isSignedIn) {
-    // navigate home
+    navigation.navigate('/board');
   }
 
   return null;

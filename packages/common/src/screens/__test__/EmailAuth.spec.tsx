@@ -13,7 +13,7 @@ const fetch = (fetcher as any) as jest.Mock;
 const { Response } = jest.requireActual('node-fetch');
 const components = {
   screens: {
-    EmailAuth: { component: EmailAuth, path: '/emailAuth' },
+    EmailAuth: { component: EmailAuth, path: '/authenticating' },
     Home: { component: Home, path: '/board' },
   },
 };
@@ -62,6 +62,17 @@ const withProviders = (Component: any) => {
   };
 };
 
+const updateFormWith = ({ values, getByLabelText }) => {
+  const formInput = values;
+  const elements = Object.keys(formInput).reduce((acc, name) => {
+    acc[name] = getByLabelText(name);
+    return acc;
+  }, {});
+  Object.keys(elements).forEach((item) => {
+    fireEvent.changeText(elements[item], formInput[item]);
+  });
+};
+
 it('renders correctly', () => {
   const EmailNavigation = withNavigation(components);
   const Auth = withProviders(EmailNavigation);
@@ -87,13 +98,9 @@ test('test cannot sign up with invalid password format', async () => {
     confirm_password: 'random1',
   };
   const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
-  const elements = Object.keys(formInput).reduce((acc, name) => {
-    acc[name] = getByLabelText(name);
-    return acc;
-  }, {});
-  Object.keys(elements).forEach((item) => {
-    fireEvent.changeText(elements[item], formInput[item]);
-  });
+
+  updateFormWith({ values: formInput, getByLabelText });
+
   fireEvent.press(getByText(/Sign up with email/i));
 
   await expect(findByLabelText('Invalid Password format')).toBeTruthy();
@@ -122,14 +129,34 @@ test('test can sign up', async () => {
   };
   const { getByLabelText, getByText, findByText } = renderWithNavigation(components);
 
-  const elements = Object.keys(formInput).reduce((acc, name) => {
-    acc[name] = getByLabelText(name);
-    return acc;
-  }, {});
-  Object.keys(elements).forEach((item) => {
-    fireEvent.changeText(elements[item], formInput[item]);
-  });
+  updateFormWith({ values: formInput, getByLabelText });
+
   fireEvent.press(getByText(/Sign up with email/i));
 
   await expect(findByText(/Board/i)).toBeTruthy();
+});
+
+test('renders api form validation errors', async () => {
+  const errors = {
+    password: ['wrong password'],
+  };
+  const fetchResponse = {
+    ok: false,
+    json: () => Promise.resolve({ errors }),
+  };
+  fetch.mockReturnValue(Promise.resolve(fetchResponse));
+
+  const formInput: FormState = {
+    first_name: 'random',
+    last_name: 'random',
+    email: 'random@random.com',
+    password: 'R#and0m',
+    confirm_password: 'R#and0m',
+  };
+  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
+
+  updateFormWith({ values: formInput, getByLabelText });
+
+  fireEvent.press(getByText(/Sign up with email/i));
+  await expect(findByLabelText('wrong password')).toBeTruthy();
 });

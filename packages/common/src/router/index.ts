@@ -3,16 +3,16 @@ import { AuthResolver, Splash, Home, EmailAuth } from '../screens';
 export * as Stack from './stackRouter';
 
 export const Routes = {
-  Splash: {
-    path: '/',
-    component: Splash,
-  },
   AuthResolver: {
     path: '/authResolver',
     component: AuthResolver,
   },
+  Splash: {
+    path: '/',
+    component: Splash,
+  },
   Email: {
-    path: '/emailAuth',
+    path: '/authenticating',
     component: EmailAuth,
   },
   Home: {
