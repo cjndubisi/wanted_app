@@ -3,7 +3,7 @@ jobs:
   node:
     working_directory: ~/packages/common
     docker:
-      - image: circleci/node:8
+      - image: circleci/node:12
     steps:
       - checkout
 
@@ -29,7 +29,7 @@ jobs:
           name: jest tests
           command: |
             mkdir -p test-results/jest
-            yarn run test
+            yarn test --ci
           environment:
             JEST_JUNIT_OUTPUT: test-results/jest/junit.xml
 
