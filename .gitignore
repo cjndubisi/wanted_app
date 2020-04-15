@@ -11,17 +11,20 @@ web-build/
 web-report/
 .idea
 
-<<<<<<< HEAD
 dist
 .env.*
+.env
+
 **/ios/Pods/*
-=======
 ios/Pods/*
 android/.gradle/*
->>>>>>> c72e662b7411cc120fd5f42e673615e55a50a580
 # macOS
 .DS_Store
 .idea
 *.log
 coverage/
 node_modules
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

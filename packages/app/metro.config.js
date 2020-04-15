@@ -22,8 +22,7 @@ const modules = [
 ];
 
 module.exports = {
-  // projectRoot: path.resolve(__dirname, '../../'),
-  projectRoot: __dirname,
+  projectRoot: root,
 
   // We need to watch the root of the monorepo
   // This lets Metro find the monorepo packages automatically using haste

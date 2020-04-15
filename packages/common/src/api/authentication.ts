@@ -1,8 +1,10 @@
 import { default as fire } from 'node-fetch';
 import { RegisterResponse, User } from './types';
 import { Platform } from 'react-native';
-// const API_URL = 'https://wanted-be.herokuapp.com/v1';
-const API_URL = 'http://localhost:3000/v1';
+import Config from './../utils/constants';
+
+const { API_URL } = Config;
+
 let fetch = null;
 if (Platform.OS !== 'web') {
   fetch = fire;
