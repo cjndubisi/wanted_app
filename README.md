@@ -9,28 +9,34 @@ Wanted react Native and Web App
 - Cocoapods
 - Android Studio
 
-### Installation
+## Installation
 
 ```
-npm install
+// install Yarn
+brew install yarn
+
+// Install packages
+yarn
 ```
 
-### Run
+## Run
 
-```
-// ios
-$: cd ios
-$: pod install
-$: cd ..
-$: npm run ios
+Transpile @wanted/common from ts to js
+`$: yarn workspace @wanted/common watch`
 
-// android
-$: npm run android
+### iOS
 
-// web
-$: npm run web
-```
+`$: yarn workspace @wanted/mobile ios:fresh`
+
+### Android
+
+`$: yarn workspace @wanted/mobile android`
+
+### Web
+
+`$: yarn workspace @wanted/web start`
 
 ### Test
 
-Run `npm test`
+Test core modules only
+`$: yarn workspace @wanted/common test`

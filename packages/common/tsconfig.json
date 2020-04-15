@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "target": "ES6",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "module": "commonjs",
+    "outDir": "dist",
+    "experimentalDecorators": true,
+    "strictPropertyInitialization": false,
+    "declaration": true,
+    "baseUrl": ".",
+    "paths": {
+      "*": ["index.web", "index.native", "*.web", "*.native", "*"]
+    }
+  },
+  "include": ["src", "__mocks__"],
+  "exclude": ["node_modules", "**/*.spec.(ts|tsx)"]
+}

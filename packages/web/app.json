@@ -1,0 +1,6 @@
+{
+  "name": "Wanted",
+  "expo": {
+    "platforms": ["web"]
+  }
+}

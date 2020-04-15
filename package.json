@@ -1,54 +1,11 @@
 {
   "scripts": {
-    "start": "react-native start",
-    "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator='iPhone 6s'",
-    "web": "expo start --web",
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
-  "jest": {
-    "preset": "react-native",
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "jsx",
-      "node"
-    ]
-  },
-  "dependencies": {
-    "@types/jest": "^25.1.4",
-    "expo": "~36.0.0",
-    "react": "~16.9.0",
-    "react-dom": "~16.9.0",
-    "react-native": "~0.61.4",
-    "react-native-gesture-handler": "~1.5.0",
-    "react-native-reanimated": "~1.4.0",
-    "react-native-screens": "2.0.0-alpha.12",
-    "react-native-unimodules": "~0.7.0",
-    "react-native-web": "~0.11.7"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@types/react": "~16.9.0",
-    "@types/react-native": "~0.60.23",
-    "@typescript-eslint/eslint-plugin": "^2.23.0",
-    "@typescript-eslint/parser": "^2.23.0",
-    "babel-jest": "~24.9.0",
-    "babel-preset-expo": "~8.0.0",
-    "eslint": "^6.8.0",
-    "eslint-config-airbnb-base": "^14.1.0",
-    "eslint-config-airbnb-typescript": "^7.0.0",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
-    "jest": "~24.9.0",
-    "metro-react-native-babel-preset": "~0.56.0",
-    "react-test-renderer": "^16.9.0",
-    "typescript": "~3.6.3"
-  },
-  "private": true
+  "workspaces": [
+    "packages/*"
+  ],
+  "private": true,
+  "version": "0.0.0"
 }
