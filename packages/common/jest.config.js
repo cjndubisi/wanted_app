@@ -10,7 +10,7 @@ module.exports = {
   },
   modulePaths: ['src'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'json', 'jsx', 'node'],
-  testPathIgnorePatterns: ['/node_modules/'],
+  testPathIgnorePatterns: ['/node_modules/', '<rootDir>/dist'],
   transformIgnorePatterns: [
     'node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*)',
   ],
