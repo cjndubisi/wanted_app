@@ -21,8 +21,10 @@ const appIncludes = [
 
 const createENVFile = (isDev) => {
   const rootEnv = isDev ? '.env.development' : '.env';
-  const fileEnv = fs.readFileSync(resolveApp(`../../${rootEnv}`), 'utf8');
-  fs.writeFileSync('.env', fileEnv);
+  if(fs.existsSync(resolveApp(`../../${rootEnv}`))) {
+    const fileEnv = fs.readFileSync(resolveApp(`../../${rootEnv}`), 'utf8');
+    fs.writeFileSync('.env', fileEnv);
+  }
 };
 
 module.exports = function override(config, env) {
