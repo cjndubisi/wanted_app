@@ -1,4 +1,5 @@
-# Wanted
+# Wanted - Deploy Web Only
+This branch has packages/app removed from git
 
 Wanted react Native and Web App
 
