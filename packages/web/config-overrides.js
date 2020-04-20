@@ -11,9 +11,7 @@ require.cache[require.resolve('react-dev-utils/clearConsole')].exports = () => {
 // end avoid
 
 const appIncludes = [
-  resolveApp('../..'),
   resolveApp('src'),
-  resolveApp('../common/src'),
   resolveApp('../../node_modules/react-native-gesture-handler/'),
   resolveApp('../../node_modules/react-native-haptic-feedback/'),
   resolveApp('../../node_modules/react-native-vector-icons/'),
