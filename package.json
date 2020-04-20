@@ -2,7 +2,7 @@
   "scripts": {
     "test": "jest --collect-coverage",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "start": "yarn workspace @wanted/web build"
+    "build": "yarn workspace @wanted/web build"
   },
   "workspaces": [
     "packages/*"
