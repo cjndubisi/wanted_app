@@ -6,7 +6,10 @@ interface IConfig {
 
 let nativeConfig: Partial<IConfig> = {};
 if (Platform.OS !== 'web') {
-  nativeConfig = require('react-native-config');
+  try {
+    nativeConfig = require('react-native-config');
+  } catch (ex) {
+  }
 }
 
 const env = process.env;
