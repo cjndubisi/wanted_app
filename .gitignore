@@ -17,6 +17,9 @@ dist
 
 **/ios/Pods/*
 ios/Pods/*
+*.dSYM.zip
+*.ipa
+/xcuserdata/**
 android/.gradle/*
 # macOS
 .DS_Store

@@ -1,0 +1,3 @@
+git_url('git@github.com:cjndubisi/wanted_app_match.git')
+
+app_identifier('wanted.app.ios')

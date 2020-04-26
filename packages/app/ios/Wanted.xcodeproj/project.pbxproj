@@ -137,6 +137,12 @@
 			attributes = {
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = M9399PEWF4;
+						ProvisioningStyle = Manual;
+					};
+				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Wanted" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -182,7 +188,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/..\"\nexport EXTRA_PACKAGER_ARGS=\"--entry-file packages/app/index.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		F8BC737F2AD7A05944D9E2A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -257,8 +263,11 @@
 			baseConfigurationReference = 3B47C5AFCB8BDE514B7D1AC6 /* Pods-Wanted.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
 				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = M9399PEWF4;
 				INFOPLIST_FILE = Wanted/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -268,6 +277,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = wanted.app.ios;
 				PRODUCT_NAME = Wanted;
+				PROVISIONING_PROFILE_SPECIFIER = "match Development wanted.app.ios";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -277,7 +287,10 @@
 			baseConfigurationReference = 8AC623DBF3A3E2CB072F81F2 /* Pods-Wanted.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
+				DEVELOPMENT_TEAM = M9399PEWF4;
 				INFOPLIST_FILE = Wanted/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -287,6 +300,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = wanted.app.ios;
 				PRODUCT_NAME = Wanted;
+				PROVISIONING_PROFILE_SPECIFIER = "match AppStore wanted.app.ios";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
