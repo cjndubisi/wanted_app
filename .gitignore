@@ -22,6 +22,8 @@ ios/Pods/*
 **/xcuserdata/**
 **/app/fastlane/report.xml
 
+**/.bundle/
+
 android/.gradle/*
 # macOS
 .DS_Store
