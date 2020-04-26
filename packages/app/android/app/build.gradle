@@ -73,12 +73,15 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
+    bundleAssetName: "index.android.bundle",
+    cliPath: "../../../../node_modules/react-native/local-cli/cli.js",
+    entryFile: "packages/app/index.js",
     entryFile: "index.js",
     enableHermes: false
 ]
 
-apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
-apply from: "../../node_modules/react-native/react.gradle"
+apply from: '../../../../node_modules/react-native-unimodules/gradle.groovy'
+apply from: "../../../../node_modules/react-native/react.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -150,7 +153,7 @@ dependencies {
     addUnimodulesDependencies()
 
     if (enableHermes) {
-        def hermesPath = "../../node_modules/hermes-engine/android/";
+        def hermesPath = "../../../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
         releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
@@ -165,5 +168,5 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
-applyNativeModulesAppBuildGradle(project)
+apply from: file("../../../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle");
+applyNativeModulesAppBuildGradle(project, '../../..')

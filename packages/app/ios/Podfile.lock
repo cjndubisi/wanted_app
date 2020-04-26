@@ -1,4 +1,22 @@
 PODS:
+  - appcenter-analytics (3.0.2):
+    - AppCenter/Analytics
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-core (3.0.2):
+    - AppCenterReactNativeShared
+    - React
+  - appcenter-crashes (3.0.2):
+    - AppCenter/Crashes
+    - AppCenterReactNativeShared
+    - React
+  - AppCenter/Analytics (3.1.1):
+    - AppCenter/Core
+  - AppCenter/Core (3.1.1)
+  - AppCenter/Crashes (3.1.1):
+    - AppCenter/Core
+  - AppCenterReactNativeShared (3.0.2):
+    - AppCenter/Core (= 3.1.1)
   - boost-for-react-native (1.63.0)
   - DoubleConversion (1.1.6)
   - EXAppLoaderProvider (8.0.0)
@@ -255,6 +273,9 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - appcenter-analytics (from `../../../node_modules/appcenter-analytics/ios`)
+  - appcenter-core (from `../../../node_modules/appcenter/ios`)
+  - appcenter-crashes (from `../../../node_modules/appcenter-crashes/ios`)
   - DoubleConversion (from `../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec`)
   - EXAppLoaderProvider (from `../../../node_modules/expo-app-loader-provider/ios`)
   - EXConstants (from `../../../node_modules/expo-constants/ios`)
@@ -307,9 +328,17 @@ DEPENDENCIES:
 
 SPEC REPOS:
   trunk:
+    - AppCenter
+    - AppCenterReactNativeShared
     - boost-for-react-native
 
 EXTERNAL SOURCES:
+  appcenter-analytics:
+    :path: "../../../node_modules/appcenter-analytics/ios"
+  appcenter-core:
+    :path: "../../../node_modules/appcenter/ios"
+  appcenter-crashes:
+    :path: "../../../node_modules/appcenter-crashes/ios"
   DoubleConversion:
     :podspec: "../../../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec"
   EXAppLoaderProvider:
@@ -420,6 +449,11 @@ EXTERNAL SOURCES:
     :path: "../../../node_modules/react-native/ReactCommon/yoga"
 
 SPEC CHECKSUMS:
+  AppCenter: 513d32888854d67d8cfbd3a8db16aeb5fb2e2a75
+  appcenter-analytics: f819aa9bd41c43b8b9ae53aa5dfd862b48a65f50
+  appcenter-core: 74a3db7d48a720fc3a70e0cf5cbda720decac008
+  appcenter-crashes: 0aea510872e4f9186553941b75ba0e9e6c7d9e07
+  AppCenterReactNativeShared: c4eb2ad593c32fbc2fc5f2ea9f5cf1faae61c182
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
   DoubleConversion: 5805e889d232975c086db112ece9ed034df7a0b2
   EXAppLoaderProvider: ebdb6bc2632c1ccadbe49f5e4104d8d690969c49

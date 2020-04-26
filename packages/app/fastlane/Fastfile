@@ -5,12 +5,21 @@ before_all do
   ensure_git_status_clean
 end
 
+private_lane :options_for_branch do | options |
+  {
+    app_identifier: 'wanted.app.ios',
+    export_type: git_branch == 'master' ? 'app-store' : 'ad-hoc',
+    match_profile_name: git_branch == 'master' ? 'match AppStore wanted.app.ios' : 'match AdHoc wanted.app.ios'
+  }
+end
+
 platform :ios do
   # iOS Lanes
 
   desc "Fetch certificates and provisioning profiles"
   lane :certificates do
     match(app_identifier: "wanted.app.ios", type: "development", readonly: false)
+    match(app_identifier: "wanted.app.ios", type: "adhoc", readonly: false)
     match(app_identifier: "wanted.app.ios", type: "appstore", readonly: false)
   end
 
@@ -24,14 +33,17 @@ platform :ios do
     )
     certificates
     increment_build_number(xcodeproj: './ios/Wanted.xcodeproj')
+
+    options = options_for_branch
+
     gym(
       scheme: 'Wanted',
       workspace: './ios/Wanted.xcworkspace',
       configuration: 'Release',
       export_options: {
-        method: "app-store",
+        method: options[:export_type],
         provisioningProfiles: { 
-          "wanted.app.ios" => "match AppStore wanted.app.ios",
+          "wanted.app.ios" => options[:match_profile_name]
         }
       }
     )
@@ -40,6 +52,13 @@ platform :ios do
   desc 'Ship to Testflight.'
   lane :beta do
     build
+    appcenter_upload(
+      api_token: ENV["APPCENTER_API_TOKEN"],
+      owner_name: ENV["APPCENTER_OWNER_NAME"],
+      app_name: ENV["APPCENTER_APP_NAME"],
+      dsym: ENV["FASTLANE_OUTPUT_DIRECTORY"],
+      ipa: ENV["FASTLANE_OUTPUT_DIRECTORY"]
+    )
     commit_version_bump(message: 'Bump build', xcodeproj: 'ios/Wanted.xcodeproj')
     push_to_git_remote
   end
