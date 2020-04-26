@@ -1,7 +1,6 @@
 fastlane_version "2.141.0"
 
 before_all do
-  ensure_git_branch
   ensure_git_status_clean
 end
 
