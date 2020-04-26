@@ -19,7 +19,7 @@ dist
 ios/Pods/*
 *.dSYM.zip
 *.ipa
-/xcuserdata/**
+**/xcuserdata/**
 **/app/fastlane/report.xml
 
 android/.gradle/*
