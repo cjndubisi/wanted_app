@@ -2,6 +2,21 @@ fastlane_version "2.141.0"
 
 before_all do
   ensure_git_status_clean(show_uncommitted_changes: true)
+  if is_ci?
+    create_ci_keychain
+  end
+end
+
+after_all do |lane, options|
+  if is_ci?
+    delete_ci_keychain
+  end
+end
+
+error do |lane, exception|
+  if is_ci?
+    delete_ci_keychain
+  end
 end
 
 private_lane :options_for_branch do | options |
@@ -60,6 +75,27 @@ platform :ios do
     )
     commit_version_bump(message: 'Bump build', xcodeproj: 'ios/Wanted.xcodeproj')
     push_to_git_remote
+  end
+
+  private_lane :create_ci_keychain do
+    keychain_name = "ci_keychain"
+    ENV["KEYCHAIN_NAME"] = keychain_name
+    ENV["KEYCHAIN_PASSWORD"] = keychain_name
+    ENV["MATCH_KEYCHAIN_NAME"] = keychain_name
+    ENV["MATCH_KEYCHAIN_PASSWORD"] = keychain_name
+
+    create_keychain(
+      name: keychain_name,
+      password: keychain_name,
+      default_keychain: true,
+      unlock: true,
+      timeout: 3600,
+      add_to_search_list: true
+    )
+  end
+
+  private_lane :delete_ci_keychain do
+    delete_keychain(name: "ci_keychain")
   end
 end
 
