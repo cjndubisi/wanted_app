@@ -59,7 +59,7 @@ platform :ios do
       use_bundle_exec: true,
     )
 
-    match(type: options[:match_type])
+    certificates
     increment_build_number(xcodeproj: './ios/Wanted.xcodeproj')
 
     gym(
