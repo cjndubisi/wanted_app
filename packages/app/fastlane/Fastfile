@@ -1,7 +1,7 @@
 fastlane_version "2.141.0"
 
 before_all do
-  # ensure_git_status_clean(show_uncommitted_changes: true)
+  ensure_git_status_clean(show_uncommitted_changes: true)
   if is_ci?
     create_ci_keychain
   end
@@ -23,6 +23,7 @@ private_lane :options_for_branch do | options |
   {
     app_identifier: 'wanted.app.ios',
     export_type: git_branch == 'master' ? 'app-store' : 'ad-hoc',
+    match_type: git_branch == 'master' ? 'appstore' : 'adhoc',
     match_profile_name: git_branch == 'master' ? 'match AppStore wanted.app.ios' : 'match AdHoc wanted.app.ios'
   }
 end
@@ -48,22 +49,24 @@ platform :ios do
 
   desc 'Build the iOS application.'
   private_lane :build do
+    options = options_for_branch
+
     clear_derived_data
+    bundle_ios
     cocoapods(
       podfile: "ios/Podfile",
       repo_update: true,
       use_bundle_exec: true,
     )
-    bundle_ios
-    certificates
-    increment_build_number(xcodeproj: './ios/Wanted.xcodeproj')
 
-    options = options_for_branch
+    match(type: options[:match_type])
+    increment_build_number(xcodeproj: './ios/Wanted.xcodeproj')
 
     gym(
       scheme: 'Wanted',
       workspace: './ios/Wanted.xcworkspace',
       configuration: 'Release',
+      export_method: options[:export_type],
       export_options: {
         method: options[:export_type],
         provisioningProfiles: { 
