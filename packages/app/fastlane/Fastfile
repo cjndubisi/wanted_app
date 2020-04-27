@@ -84,7 +84,7 @@ platform :ios do
       ipa: ENV["FASTLANE_OUTPUT_DIRECTORY"]
     )
     commit_version_bump(message: 'Bump build', xcodeproj: 'ios/Wanted.xcodeproj')
-    push_to_git_remote
+    push_to_git_remote(tags: false)
   end
 
   private_lane :create_ci_keychain do
