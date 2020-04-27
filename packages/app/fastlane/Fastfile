@@ -1,7 +1,7 @@
 fastlane_version "2.141.0"
 
 before_all do
-  ensure_git_status_clean(show_uncommitted_changes: true)
+  ensure_git_status_clean(show_uncommitted_changes: true) if is_ci?
   if is_ci?
     create_ci_keychain
   end
@@ -66,6 +66,7 @@ platform :ios do
       scheme: 'Wanted',
       workspace: './ios/Wanted.xcworkspace',
       configuration: 'Release',
+      clean: true,
       export_method: options[:export_type],
       export_options: {
         method: options[:export_type],
