@@ -86,7 +86,7 @@ platform :ios do
     )
 
     if ['develop', 'master'].include? git_branch 
-      commit_version_bump(message: 'Bump build', xcodeproj: 'ios/Wanted.xcodeproj')
+      commit_version_bump(message: '[skip ci] Bump build', xcodeproj: 'ios/Wanted.xcodeproj')
       push_to_git_remote(
         remote_branch: git_branch,
         tags: false
