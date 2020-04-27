@@ -49,12 +49,12 @@ platform :ios do
   desc 'Build the iOS application.'
   private_lane :build do
     clear_derived_data
-
     cocoapods(
       podfile: "ios/Podfile",
       repo_update: true,
       use_bundle_exec: true,
     )
+    bundle_ios
     certificates
     increment_build_number(xcodeproj: './ios/Wanted.xcodeproj')
 
