@@ -80,6 +80,7 @@ platform :ios do
       api_token: ENV["APPCENTER_API_TOKEN"],
       owner_name: ENV["APPCENTER_OWNER_NAME"],
       app_name: ENV["APPCENTER_APP_NAME"],
+      notify_testers: true,
       dsym: ENV["FASTLANE_OUTPUT_DIRECTORY"],
       ipa: ENV["FASTLANE_OUTPUT_DIRECTORY"]
     )
