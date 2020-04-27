@@ -13,7 +13,6 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		41F71B89CFBBC26DEC615C29 /* libPods-Wanted.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2524C4C2FE00B940904A648C /* libPods-Wanted.a */; };
 		4F73E1E024560BE400B39D4A /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F73E1DF24560BE400B39D4A /* AppCenter-Config.plist */; };
-		4F73E1E1245656EC00B39D4A /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,11 +116,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Wanted" */;
 			buildPhases = (
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				13B07F871A680F5B00A75B9A /* Sources */,
 				F8BC737F2AD7A05944D9E2A1 /* [CP] Check Pods Manifest.lock */,
 				FD4C38642228810C00325AF5 /* Start Packager */,
-				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
-				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 			);
 			buildRules = (
@@ -172,7 +171,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4F73E1E1245656EC00B39D4A /* main.jsbundle in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				4F73E1E024560BE400B39D4A /* AppCenter-Config.plist in Resources */,
@@ -194,7 +192,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/..\"\n\n../../../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/..\"\nexport EXTRA_PACKAGER_ARGS=\"--entry-file packages/app/index.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh packages/app/index.js\n";
 		};
 		F8BC737F2AD7A05944D9E2A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
