@@ -24,6 +24,9 @@ ios/Pods/*
 
 **/.bundle/
 
+packages/app/ios/main.jsbundle
+packages/app/ios/assets
+
 android/.gradle/*
 # macOS
 .DS_Store
