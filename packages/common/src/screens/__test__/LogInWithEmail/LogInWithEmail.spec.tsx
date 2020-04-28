@@ -1,8 +1,6 @@
 jest.mock('node-fetch');
 
-import { BaseNavigationContainer } from '@react-navigation/core';
-import { createStackNavigator } from '@react-navigation/stack';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
 import EmailLogin, { FormState } from '../../LogInWithEmail';
