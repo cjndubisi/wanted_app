@@ -27,6 +27,7 @@ export default [
     placeholder: 'Password',
     key: 'password',
     validation: (form): string => {
+      if (!form.password) return;
       const passwordValid = form.password.match(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/
       );
@@ -34,7 +35,7 @@ export default [
     },
   },
   {
-    placeholder: 'Confirm Passwod',
+    placeholder: 'Confirm Password',
     key: 'confirm_password',
     validation: (form): string => {
       if (form.password !== form.confirm_password) {

@@ -1,4 +1,4 @@
-import EmailAuth from './EmailAuth';
+import EmailAuth from './SignUpWithEmail';
 import Home from './Home';
 import AuthResolver from './ResolveAuthScreen';
 import Splash from './Splash';

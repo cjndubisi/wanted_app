@@ -11,7 +11,8 @@ export type FormState = Partial<User & { password: string; confirm_password: str
 export type FormErrorState = { [T in keyof FormState]: string };
 
 const isWeb = Platform.OS == 'web';
-export default ({ navigation }) => {
+export default
+({ navigation }) => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});

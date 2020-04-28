@@ -26,6 +26,7 @@ ios/Pods/*
 
 packages/app/ios/main.jsbundle
 packages/app/ios/assets
+packages/web/build
 
 android/.gradle/*
 # macOS
