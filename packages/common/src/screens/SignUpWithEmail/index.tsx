@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, Keyboard } from 'react-native';
 import { User } from '../../api/types';
 import { ActivityLoader, Button, DismissKeyboard } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
@@ -26,6 +26,7 @@ export default ({ navigation }) => {
   }, [state.isSignedIn]);
 
   const signUp = async () => {
+    Keyboard.dismiss();
     const errors: FormErrorState = formConfig.reduce((acc, next) => {
       const error = next.validation(info);
       // update empty object only if error exist
