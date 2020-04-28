@@ -28,7 +28,7 @@ export const register = async (user: Partial<User>): Promise<UserResponse> => {
   return json;
 };
 
-export const login = async (user: Partial<User>): Promise<UserResponse> => {
+export const login = async (user: Partial<{ password: string; email: string }>): Promise<UserResponse> => {
   // To be updated
   const response = await fetch(`${API_URL}${'/login'}`, {
     method: 'POST',
