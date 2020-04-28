@@ -55,8 +55,7 @@
     "metro-react-native-babel-preset": "~0.56.0",
     "prettier": "^2.0.2",
     "react-test-renderer": "^16.9.0",
-    "testing-library": "^0.0.2",
-    "typescript": "~3.6.3"
+    "testing-library": "^0.0.2"
   },
   "private": true
 }

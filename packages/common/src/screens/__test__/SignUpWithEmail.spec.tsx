@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { fireEvent, render, prettyPrint, waitForElement, act } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
-import EmailAuth, { FormState } from '../EmailAuth';
+import EmailAuth, { FormState } from '../SignUpWithEmail';
 import { AuthProvider } from '../../context/AuthContext';
 import { default as fetcher } from 'node-fetch';
 import Home from '../Home';
@@ -30,7 +30,7 @@ const withNavigation = ({
       return (
         <BaseNavigationContainer>
           <Stack.Navigator>
-            {Object.keys(screens).map((name) => (
+            {Object.keys(screens).map(name => (
               <Stack.Screen
                 key={name}
                 name={screens[name].path}
@@ -68,7 +68,7 @@ const updateFormWith = ({ values, getByLabelText }) => {
     acc[name] = getByLabelText(name);
     return acc;
   }, {});
-  Object.keys(elements).forEach((item) => {
+  Object.keys(elements).forEach(item => {
     fireEvent.changeText(elements[item], formInput[item]);
   });
 };

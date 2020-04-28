@@ -1,14 +1,6 @@
-import formConfig from './../EmailAuth/formConfig';
+import formConfig from './../SignUpWithEmail/formConfig';
 
-const form = {
-  first_name: 'random',
-  last_name: 'random',
-  email: 'random@random.com',
-  password: 'random',
-  confirm_password: 'random1',
-};
-
-describe('Form Validaiton Execptions', () => {
+describe('Form Validation Exceptions', () => {
   test('First name should be more than 2', () => {
     const form = { first_name: 'ss' };
     const validation = formConfig.filter((item) => item.key === 'first_name')[0];
@@ -57,7 +49,7 @@ describe('Form Validaiton Execptions', () => {
       expect(error).toBe('');
     });
 
-    test('validates matching confirm passsword', () => {
+    test('validates matching confirm password', () => {
       const form = { password: value, confirm_password: value };
       const validation = formConfig.filter((item) => item.key === 'confirm_password')[0];
       const error = validation.validation(form);
