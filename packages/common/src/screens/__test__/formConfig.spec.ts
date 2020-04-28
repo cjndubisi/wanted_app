@@ -49,7 +49,7 @@ describe('Form Validaiton Execptions', () => {
       expect(error).toBe('Invalid Password format');
     });
 
-    test('validates correct passord', () => {
+    test('validates correct password', () => {
       const form = { password: value };
       const validation = formConfig.filter((item) => item.key === 'password')[0];
       const error = validation.validation(form);

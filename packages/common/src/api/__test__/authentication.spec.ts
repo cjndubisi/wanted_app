@@ -42,7 +42,7 @@ test("register's user", async () => {
   expect(fetch).toHaveBeenCalledWith('http://localhost:3000/v1/users', requestBody(user));
 });
 
-test('thows error on server error reponse ', async () => {
+test('throws error on server error response ', async () => {
   const errors = {
     password: ['wrong password'],
   };
