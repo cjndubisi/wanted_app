@@ -1,6 +1,6 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { register } from '../api';
+import { login, register } from "../api";
 import { User } from '../api/types';
 import createDataContext from './createDataProvider';
 const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';
@@ -90,6 +90,28 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
       });
     }
   },
+  LogInWithEmail: async (info: Partial<{ password: string; email: string }>) => {
+    dispatch({ type: AuthTypes.LOADING });
+
+    try {
+      const { user, auth_token } = await login(info);
+
+      await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
+
+      dispatch({
+        type: AuthTypes.AUTH_SUCCESS,
+        payload: {
+          user,
+          user_token: auth_token,
+        },
+      });
+    } catch (error) {
+      dispatch({
+        type: AuthTypes.AUTH_FAILURE,
+        payload: JSON.parse(error.message),
+      });
+    }
+  }
 });
 
 type DispatchAction = typeof authActions;

@@ -1,7 +1,7 @@
 import { NavigationContainerRef, useLinking, InitialState } from '@react-navigation/native';
 import React from 'react';
 import { AuthProvider } from './context/AuthContext';
-import { Routes as ROUTES, Stack } from './router';
+import { Routes as ROUTES, Stack } from "./router";
 import { Platform, AsyncStorage } from 'react-native';
 
 export default () => {
@@ -12,7 +12,7 @@ export default () => {
     config: {
       Root: {
         path: '',
-        initialRouteName: '/authenticating',
+        initialRouteName: ROUTES.Email.path,
         screens: Object.keys(ROUTES).reduce<{ [key: string]: string }>(
           (acc, name) => {
             // Convert screen names such as SimpleStack to kebab case (simple-stack)

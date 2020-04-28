@@ -1,5 +1,5 @@
 jest.mock('node-fetch');
-import { RegisterResponse } from '../types';
+import { UserResponse } from '../types';
 import { register } from '../authentication';
 import { default as fetcher } from 'node-fetch';
 const { Response } = jest.requireActual('node-fetch');
@@ -24,7 +24,7 @@ const user = {
   password: 'Random',
 };
 test("register's user", async () => {
-  const body: RegisterResponse = {
+  const body: UserResponse = {
     user: {
       id: 1,
       first_name: 'random',

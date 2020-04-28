@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Platform, View } from 'react-native';
-import { User } from '../../api/types';
 import { ActivityLoader, Button } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
-import { Container, H1, InputCaption, Label, Text, ErrorLabel, Input } from '../../styled';
+import { Container, H1, Label, Text, ErrorLabel, Input } from '../../styled';
 import formConfig from './formConfig';
-import { Routes } from "../../router";
+import { Routes } from '../../router';
 
-export type FormState = Partial<User & { password: string; confirm_password: string }>;
+export type FormState = Partial<{ password: string; email: string }>;
 export type FormErrorState = { [T in keyof FormState]: string };
 
 const isWeb = Platform.OS == 'web';
-export default
-({ navigation }) => {
-  const { signUpWithEmail, state } = React.useContext(AuthContext);
+export default ({ navigation }) => {
+  const { LogInWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
   // To prevent rendering page, as cannot dispatch { error: null } to connect from here
@@ -25,13 +23,8 @@ export default
     }
   }, [state.isSignedIn]);
 
-  const signUp = async () => {
-    const errors: FormErrorState = formConfig.reduce((acc, next) => {
-      const error = next.validation(info);
-      // update empty object only if error exist
-      if (error !== '') {
-        acc[next.key as keyof FormErrorState] = error;
-      }
+  const Login = async () => {
+    const errors: FormErrorState = formConfig.reduce((acc) => {
       return acc;
     }, {} as FormErrorState);
 
@@ -39,18 +32,17 @@ export default
       return setFormError(errors);
     }
 
-    // sign up
+    // log in
     let request = { ...info };
-    delete request.confirm_password;
 
     setShowingAPIError(false);
-    await signUpWithEmail(request);
+    await LogInWithEmail(request);
   };
 
   if (state.error && !showingAPIError) {
     const error = state.error;
     let viewError = { other: '' };
-    Object.keys(error).forEach((key) => {
+    Object.keys(error).forEach(key => {
       // does the key match any form field
       if (info[key] !== undefined) {
         viewError[key] = error[key][0];
@@ -74,7 +66,7 @@ export default
           <Text>Create an account buy and sell services, product, jobs and more.</Text>
         </View>
         <ErrorLabel>{}</ErrorLabel>
-        {formConfig.map((input) => (
+        {formConfig.map(input => (
           <View style={{ marginBottom: 12 }} key={`input_${input.key}`}>
             <View
               style={{
@@ -99,17 +91,12 @@ export default
               }}
               value={info[input.key] || ''}
             />
-            {input.key === 'password' ? (
-              <InputCaption>
-                {'Requires at least an Uppercase letter, a symbol and a number'}
-              </InputCaption>
-            ) : null}
           </View>
         ))}
         <Button
           bold
-          title="Sign up with email"
-          onPress={signUp}
+          title="Log in"
+          onPress={Login}
           titleColor="white"
           backgroundColor="brown"
         />

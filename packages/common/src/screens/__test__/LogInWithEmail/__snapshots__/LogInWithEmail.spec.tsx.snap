@@ -1,0 +1,630 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "flex": 1,
+    }
+  }
+>
+  <RNCSafeAreaView
+    onInsetsChange={[Function]}
+    style={
+      Object {
+        "flex": 1,
+      }
+    }
+  >
+    <View
+      onLayout={[Function]}
+      style={
+        Object {
+          "flex": 1,
+          "overflow": "hidden",
+        }
+      }
+    >
+      <View
+        pointerEvents="box-none"
+        style={
+          Object {
+            "bottom": 0,
+            "left": 0,
+            "position": "absolute",
+            "right": 0,
+            "top": 0,
+          }
+        }
+      >
+        <View
+          accessibilityElementsHidden={false}
+          closing={false}
+          gestureVelocityImpact={0.3}
+          importantForAccessibility="auto"
+          onClose={[Function]}
+          onGestureBegin={[Function]}
+          onGestureCanceled={[Function]}
+          onOpen={[Function]}
+          onTransitionStart={[Function]}
+          pointerEvents="box-none"
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+          transitionSpec={
+            Object {
+              "close": Object {
+                "animation": "spring",
+                "config": Object {
+                  "damping": 500,
+                  "mass": 3,
+                  "overshootClamping": true,
+                  "restDisplacementThreshold": 0.01,
+                  "restSpeedThreshold": 0.01,
+                  "stiffness": 1000,
+                },
+              },
+              "open": Object {
+                "animation": "spring",
+                "config": Object {
+                  "damping": 500,
+                  "mass": 3,
+                  "overshootClamping": true,
+                  "restDisplacementThreshold": 0.01,
+                  "restSpeedThreshold": 0.01,
+                  "stiffness": 1000,
+                },
+              },
+            }
+          }
+        >
+          <View
+            pointerEvents="box-none"
+            style={
+              Object {
+                "flex": 1,
+                "marginTop": 64,
+              }
+            }
+          >
+            <View
+              collapsable={false}
+              onGestureHandlerEvent={[Function]}
+              onGestureHandlerStateChange={[Function]}
+              style={
+                Object {
+                  "flex": 1,
+                  "transform": Array [
+                    Object {
+                      "translateX": 0,
+                    },
+                    Object {
+                      "translateX": 0,
+                    },
+                  ],
+                }
+              }
+            >
+              <View
+                pointerEvents="none"
+                style={
+                  Object {
+                    "backgroundColor": "rgb(242, 242, 242)",
+                    "bottom": 0,
+                    "left": 0,
+                    "position": "absolute",
+                    "shadowColor": "#000",
+                    "shadowOffset": Object {
+                      "height": 1,
+                      "width": -1,
+                    },
+                    "shadowOpacity": 0.3,
+                    "shadowRadius": 5,
+                    "top": 0,
+                    "width": 3,
+                  }
+                }
+              />
+              <View
+                style={
+                  Array [
+                    Object {
+                      "flex": 1,
+                      "overflow": "hidden",
+                    },
+                    Array [
+                      Object {
+                        "backgroundColor": "rgb(242, 242, 242)",
+                      },
+                      undefined,
+                    ],
+                  ]
+                }
+              >
+                <View
+                  style={
+                    Object {
+                      "flex": 1,
+                      "flexDirection": "column-reverse",
+                    }
+                  }
+                >
+                  <View
+                    style={
+                      Object {
+                        "flex": 1,
+                      }
+                    }
+                  >
+                    <View
+                      style={
+                        Array [
+                          Object {
+                            "alignSelf": "center",
+                            "backgroundColor": "#fff7e6",
+                            "flexDirection": "column",
+                            "justifyContent": "space-between",
+                            "maxWidth": 467,
+                            "minHeight": "100%",
+                          },
+                        ]
+                      }
+                    >
+                      <div
+                        className="css-view-1dbjc4n"
+                        style={
+                          Object {
+                            "WebkitAlignItems": "center",
+                            "WebkitBoxAlign": "center",
+                            "WebkitBoxDirection": "normal",
+                            "WebkitBoxFlex": 1,
+                            "WebkitBoxOrient": "vertical",
+                            "WebkitBoxPack": "center",
+                            "WebkitFlexBasis": "0%",
+                            "WebkitFlexDirection": "column",
+                            "WebkitFlexGrow": 1,
+                            "WebkitFlexShrink": 1,
+                            "WebkitJustifyContent": "center",
+                            "alignItems": "center",
+                            "backgroundColor": "rgba(52,52,52,0.30)",
+                            "display": "none",
+                            "flexBasis": "0%",
+                            "flexDirection": "column",
+                            "flexGrow": 1,
+                            "flexShrink": 1,
+                            "justifyContent": "center",
+                            "left": "0px",
+                            "msFlexAlign": "center",
+                            "msFlexDirection": "column",
+                            "msFlexNegative": 1,
+                            "msFlexPack": "center",
+                            "msFlexPositive": 1,
+                            "msFlexPreferredSize": "0%",
+                            "position": "absolute",
+                            "top": "0px",
+                            "zIndex": 1,
+                          }
+                        }
+                      >
+                        <div
+                          className="css-view-1dbjc4n"
+                          style={
+                            Object {
+                              "WebkitAlignItems": "center",
+                              "WebkitBoxAlign": "center",
+                              "WebkitBoxPack": "center",
+                              "WebkitJustifyContent": "center",
+                              "alignItems": "center",
+                              "backgroundColor": "rgba(255,255,255,1.00)",
+                              "borderBottomLeftRadius": "10px",
+                              "borderBottomRightRadius": "10px",
+                              "borderTopLeftRadius": "10px",
+                              "borderTopRightRadius": "10px",
+                              "height": "100px",
+                              "justifyContent": "center",
+                              "msFlexAlign": "center",
+                              "msFlexPack": "center",
+                              "width": "100px",
+                            }
+                          }
+                        >
+                          <div
+                            aria-valuemax="1"
+                            aria-valuemin="0"
+                            className="css-view-1dbjc4n r-alignItems-1awozwy r-justifyContent-1777fci"
+                            role="progressbar"
+                          >
+                            <div
+                              className="css-view-1dbjc4n r-animationDuration-17bb2tj r-animationIterationCount-1muvv40 r-animationKeyframes-127358a r-animationPlayState-1abnn5w r-animationTimingFunction-1ldzwu0 r-height-1r8g8re r-visibility-11j9u27 r-width-1acpoxo"
+                            >
+                              <svg
+                                height="100%"
+                                viewBox="0 0 32 32"
+                                width="100%"
+                              >
+                                <circle
+                                  cx="16"
+                                  cy="16"
+                                  fill="none"
+                                  r="14"
+                                  strokeWidth="4"
+                                  style={
+                                    Object {
+                                      "opacity": 0.2,
+                                      "stroke": "gray",
+                                    }
+                                  }
+                                />
+                                <circle
+                                  cx="16"
+                                  cy="16"
+                                  fill="none"
+                                  r="14"
+                                  strokeWidth="4"
+                                  style={
+                                    Object {
+                                      "stroke": "gray",
+                                      "strokeDasharray": 80,
+                                      "strokeDashoffset": 60,
+                                    }
+                                  }
+                                />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <View
+                        style={
+                          Object {
+                            "margin": 20,
+                            "marginTop": 44,
+                          }
+                        }
+                      >
+                        <View
+                          style={
+                            Object {
+                              "marginBottom": 20,
+                              "marginTop": 20,
+                            }
+                          }
+                        >
+                          <Text
+                            style={
+                              Array [
+                                Object {
+                                  "fontSize": 24,
+                                  "fontWeight": "bold",
+                                  "marginBottom": 10,
+                                },
+                              ]
+                            }
+                          >
+                            Wanted
+                          </Text>
+                          <Text
+                            style={
+                              Array [
+                                Object {},
+                                Object {
+                                  "color": "black",
+                                  "marginBottom": 4,
+                                },
+                              ]
+                            }
+                          >
+                            Create an account buy and sell services, product, jobs and more.
+                          </Text>
+                        </View>
+                        <Text
+                          style={
+                            Array [
+                              Object {
+                                "color": "red",
+                                "fontSize": 12,
+                                "height": 13,
+                                "marginBottom": 6,
+                              },
+                            ]
+                          }
+                        />
+                        <View
+                          style={
+                            Object {
+                              "marginBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "display": "flex",
+                                "flex": 1,
+                                "flexDirection": "row",
+                                "justifyContent": "space-between",
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                Array [
+                                  Object {},
+                                  Object {
+                                    "color": "black",
+                                    "fontSize": 12,
+                                    "fontWeight": "bold",
+                                    "marginBottom": 4,
+                                  },
+                                ]
+                              }
+                            >
+                              Email
+                            </Text>
+                            <Text
+                              accessibilityLabel="error_email"
+                              style={
+                                Array [
+                                  Object {
+                                    "color": "red",
+                                    "fontSize": 12,
+                                    "height": 13,
+                                    "marginBottom": 6,
+                                  },
+                                ]
+                              }
+                            />
+                          </View>
+                          <TextInput
+                            accessibilityLabel="email"
+                            allowFontScaling={true}
+                            onChangeText={[Function]}
+                            rejectResponderTermination={true}
+                            secureTextEntry={false}
+                            style={
+                              Array [
+                                Object {
+                                  "backgroundColor": "white",
+                                  "borderRadius": 5,
+                                  "color": "black",
+                                  "fontSize": 14,
+                                  "height": 40,
+                                  "paddingLeft": 10,
+                                  "paddingRight": 10,
+                                },
+                              ]
+                            }
+                            underlineColorAndroid="transparent"
+                            value=""
+                          />
+                        </View>
+                        <View
+                          style={
+                            Object {
+                              "marginBottom": 12,
+                            }
+                          }
+                        >
+                          <View
+                            style={
+                              Object {
+                                "display": "flex",
+                                "flex": 1,
+                                "flexDirection": "row",
+                                "justifyContent": "space-between",
+                              }
+                            }
+                          >
+                            <Text
+                              style={
+                                Array [
+                                  Object {},
+                                  Object {
+                                    "color": "black",
+                                    "fontSize": 12,
+                                    "fontWeight": "bold",
+                                    "marginBottom": 4,
+                                  },
+                                ]
+                              }
+                            >
+                              Password
+                            </Text>
+                            <Text
+                              accessibilityLabel="error_password"
+                              style={
+                                Array [
+                                  Object {
+                                    "color": "red",
+                                    "fontSize": 12,
+                                    "height": 13,
+                                    "marginBottom": 6,
+                                  },
+                                ]
+                              }
+                            />
+                          </View>
+                          <TextInput
+                            accessibilityLabel="password"
+                            allowFontScaling={true}
+                            onChangeText={[Function]}
+                            rejectResponderTermination={true}
+                            secureTextEntry={true}
+                            style={
+                              Array [
+                                Object {
+                                  "backgroundColor": "white",
+                                  "borderRadius": 5,
+                                  "color": "black",
+                                  "fontSize": 14,
+                                  "height": 40,
+                                  "paddingLeft": 10,
+                                  "paddingRight": 10,
+                                },
+                              ]
+                            }
+                            underlineColorAndroid="transparent"
+                            value=""
+                          />
+                        </View>
+                        <TouchableOpacity
+                          activeOpacity={0.8}
+                          backgroundColor="brown"
+                          onPress={[Function]}
+                          style={
+                            Array [
+                              Object {
+                                "alignItems": "center",
+                                "backgroundColor": "brown",
+                                "borderRadius": 5,
+                                "height": 40,
+                                "justifyContent": "center",
+                                "marginTop": 10,
+                              },
+                            ]
+                          }
+                        >
+                          <Text
+                            style={
+                              Array [
+                                Object {},
+                                Object {
+                                  "color": "black",
+                                  "fontWeight": "bold",
+                                  "marginBottom": 4,
+                                },
+                                Object {
+                                  "color": "white",
+                                },
+                              ]
+                            }
+                          >
+                            Log in
+                          </Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+    <View
+      pointerEvents="box-none"
+      style={
+        Object {
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    >
+      <View
+        accessibilityElementsHidden={false}
+        importantForAccessibility="auto"
+        onLayout={[Function]}
+        pointerEvents="box-none"
+        style={null}
+      >
+        <View
+          pointerEvents="none"
+          style={
+            Object {
+              "bottom": 0,
+              "left": 0,
+              "opacity": 1,
+              "position": "absolute",
+              "right": 0,
+              "top": 0,
+            }
+          }
+        >
+          <View
+            style={
+              Object {
+                "backgroundColor": "rgb(255, 255, 255)",
+                "borderBottomColor": "rgb(224, 224, 224)",
+                "flex": 1,
+                "shadowColor": "rgb(224, 224, 224)",
+                "shadowOffset": Object {
+                  "height": 0.5,
+                  "width": 0,
+                },
+                "shadowOpacity": 0.85,
+                "shadowRadius": 0,
+              }
+            }
+          />
+        </View>
+        <View
+          pointerEvents="box-none"
+          style={
+            Object {
+              "height": 64,
+              "maxHeight": undefined,
+              "minHeight": undefined,
+              "opacity": undefined,
+              "transform": undefined,
+            }
+          }
+        >
+          <View
+            pointerEvents="none"
+            style={
+              Object {
+                "height": 20,
+              }
+            }
+          />
+          <View
+            pointerEvents="box-none"
+            style={
+              Object {
+                "alignItems": "center",
+                "flex": 1,
+                "flexDirection": "row",
+                "justifyContent": "center",
+              }
+            }
+          >
+            <View
+              pointerEvents="box-none"
+              style={
+                Object {
+                  "marginHorizontal": 18,
+                  "opacity": 1,
+                }
+              }
+            >
+              <Text
+                accessibilityRole="header"
+                numberOfLines={1}
+                onLayout={[Function]}
+                style={
+                  Object {
+                    "color": "rgb(28, 28, 30)",
+                    "fontSize": 17,
+                    "fontWeight": "600",
+                  }
+                }
+              >
+                /login
+              </Text>
+            </View>
+          </View>
+        </View>
+      </View>
+    </View>
+  </RNCSafeAreaView>
+</View>
+`;

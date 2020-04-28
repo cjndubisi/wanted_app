@@ -1,4 +1,4 @@
-import { AuthResolver, Splash, Home, EmailAuth } from '../screens';
+import { AuthResolver, Splash, Home, EmailAuth, EmailLogin } from '../screens';
 
 export * as Stack from './stackRouter';
 
@@ -14,6 +14,10 @@ export const Routes = {
   Email: {
     path: '/authenticating',
     component: EmailAuth,
+  },
+  EmailLogin: {
+    path: '/login',
+    component: EmailLogin
   },
   Home: {
     path: '/board',
