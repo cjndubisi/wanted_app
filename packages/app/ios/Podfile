@@ -35,7 +35,7 @@ target 'Wanted' do
   pod 'DoubleConversion', :podspec => "#{rnPrefix}/third-party-podspecs/DoubleConversion.podspec"
   pod 'glog', :podspec => "#{rnPrefix}/third-party-podspecs/glog.podspec"
   pod 'Folly', :podspec => "#{rnPrefix}/third-party-podspecs/Folly.podspec"
-
+  pod 'RNCAsyncStorage', :path => '../../../node_modules/@react-native-community/async-storage'
   # Other native modules
 
   # Automatically detect installed unimodules

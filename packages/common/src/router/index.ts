@@ -1,7 +1,8 @@
 import { AuthResolver, Splash, Home, EmailAuth } from '../screens';
 
-export * as Stack from './stackRouter';
+import Stack2 from './stackRouter';
 
+export const Stack = Stack2;
 export const Routes = {
   AuthResolver: {
     path: '/authResolver',

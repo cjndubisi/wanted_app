@@ -15,15 +15,10 @@ export default () => {
         initialRouteName: '/authenticating',
         screens: Object.keys(ROUTES).reduce<{ [key: string]: string }>(
           (acc, name) => {
-            // Convert screen names such as SimpleStack to kebab case (simple-stack)
-            acc[name] = name
-              .replace(/([A-Z]+)/g, '-$1')
-              .replace(/^-/, '')
-              .toLowerCase();
-
+            acc[name] = ROUTES[name].path;
             return acc;
           },
-          { Splash: '' }
+          { Splash: '/' }
         ),
       },
     },
@@ -63,7 +58,7 @@ export default () => {
       <Stack.NavigationContainer initialState={initialState}>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {(Object.keys(ROUTES) as (keyof typeof ROUTES)[]).map((name) => (
-            <Stack.Screen key={name} name={name} exact {...ROUTES[name]} />
+            <Stack.Screen key={name} name={ROUTES[name].path} exact {...ROUTES[name]} />
           ))}
         </Stack.Navigator>
       </Stack.NavigationContainer>

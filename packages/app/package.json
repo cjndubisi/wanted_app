@@ -2,6 +2,7 @@
   "name": "wanted-mobile",
   "version": "0.0.1",
   "scripts": {
+    "compile": "tsc -b --incremental",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator='iPhone 11 Pro'",

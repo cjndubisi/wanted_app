@@ -3,12 +3,11 @@ import { TextProps } from 'react-native';
 import styled from 'styled-components/native';
 import { TextProp } from './types';
 
-export const Container = styled.View`
-  flex-direction: column;
-  justify-content: space-between;
-  align-self: center;
+export const Container = styled.SafeAreaView`
   min-height: 100%;
   max-width: 467px;
+  padding: 20px;
+  align-items: center;
   background-color: #fff7e6;
 `;
 
@@ -55,5 +54,8 @@ export const Button = styled.TouchableOpacity<{ backgroundColor: string }>`
 
 export const Footer = styled.View`
   display: flex;
+  flex: 1;
+  align-self: stretch;
   justify-content: flex-end;
+  margin: 20px;
 `;

@@ -2,7 +2,7 @@
   "name": "@wanted/common",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "src/index.tsx",
   "scripts": {
     "build": "rimraf dist && tsc",
     "watch": "tsc --watch ",
@@ -19,6 +19,7 @@
     "@react-navigation/stack": "^5.2.10",
     "@types/jest": "^25.1.4",
     "@types/react-router": "^5.1.5",
+    "@types/react-router-dom": "^5.1.5",
     "@types/react-test-renderer": "^16.9.2",
     "react": "^16.13.1",
     "react-native": "~0.61.4",

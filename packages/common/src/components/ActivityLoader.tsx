@@ -1,5 +1,5 @@
 import React from 'react';
-import { ActivityIndicator, ActivityIndicatorProps, Dimensions, View } from 'react-native-web';
+import { ActivityIndicator, ActivityIndicatorProps, Dimensions, View } from 'react-native';
 
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;

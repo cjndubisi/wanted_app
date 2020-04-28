@@ -7,7 +7,7 @@ export default ({ navigation }) => {
     navigation.navigate('/authenticating');
   };
   return (
-    <Container style={{ margin: 20, flex: 1, backgroundColor: '#ecf0f1', height: 100 }}>
+    <Container>
       <Title>Wanted</Title>
       <Text>Caption To capture buyers and sellers.</Text>
       <Footer>
