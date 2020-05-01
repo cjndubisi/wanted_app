@@ -5,7 +5,7 @@ import { Routes } from '../router'
 
 export default ({ navigation }) => {
   const emailAuthFlow = () => {
-    navigation.navigate(Routes.Email.path);
+    navigation.navigate(Routes.EmailSignup.path);
   };
 
   const emailLoginFlow = () => {

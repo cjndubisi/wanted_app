@@ -3,7 +3,7 @@ jest.mock('node-fetch');
 import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
-import EmailAuth, { FormState } from '../../SignUpWithEmail';
+import EmailSignup, { FormState } from '../../SignUpWithEmail';
 import { renderWithNavigation, updateFormWith, withNavigation, withProviders } from "../utils";
 import { default as fetcher } from 'node-fetch';
 import { Routes } from "../../../router";
@@ -12,7 +12,7 @@ const fetch = (fetcher as any) as jest.Mock;
 const { Response } = jest.requireActual('node-fetch');
 const components = {
   screens: {
-    EmailAuth: { component: EmailAuth, path: Routes.Email.path },
+    EmailSignup: { component: EmailSignup, path: Routes.EmailSignup.path },
     Home: { component: Home, path: Routes.Home.path },
   },
 };

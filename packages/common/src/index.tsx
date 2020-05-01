@@ -12,7 +12,7 @@ export default () => {
     config: {
       Root: {
         path: '',
-        initialRouteName: ROUTES.Email.path,
+        initialRouteName: ROUTES.EmailSignup.path,
         screens: Object.keys(ROUTES).reduce<{ [key: string]: string }>(
           (acc, name) => {
             // Convert screen names such as SimpleStack to kebab case (simple-stack)
