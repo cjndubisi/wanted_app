@@ -11,7 +11,7 @@ export type FormErrorState = { [T in keyof FormState]: string };
 
 const isWeb = Platform.OS == 'web';
 export default ({ navigation }) => {
-  const { LogInWithEmail, state } = React.useContext(AuthContext);
+  const { logInWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
   // To prevent rendering page, as cannot dispatch { error: null } to connect from here
@@ -23,7 +23,7 @@ export default ({ navigation }) => {
     }
   }, [state.isSignedIn]);
 
-  const Login = async () => {
+  const login = async () => {
     const errors: FormErrorState = formConfig.reduce((acc) => {
       return acc;
     }, {} as FormErrorState);
@@ -36,7 +36,7 @@ export default ({ navigation }) => {
     let request = { ...info };
 
     setShowingAPIError(false);
-    await LogInWithEmail(request);
+    await logInWithEmail(request);
   };
 
   if (state.error && !showingAPIError) {
@@ -96,7 +96,7 @@ export default ({ navigation }) => {
         <Button
           bold
           title="Log in"
-          onPress={Login}
+          onPress={login}
           titleColor="white"
           backgroundColor="brown"
         />

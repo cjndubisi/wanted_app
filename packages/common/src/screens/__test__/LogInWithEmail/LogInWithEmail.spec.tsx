@@ -4,9 +4,9 @@ import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
 import EmailLogin, { FormState } from '../../LogInWithEmail';
-import { renderWithNavigation, updateFormWith, withNavigation, withProviders } from "../utils";
+import { renderWithNavigation, updateFormWith, withNavigation, withProviders } from '../utils';
 import { default as fetcher } from 'node-fetch';
-import { Routes } from "../../../router";
+import { Routes } from '../../../router';
 import Home from '../../Home';
 const fetch = (fetcher as any) as jest.Mock;
 const { Response } = jest.requireActual('node-fetch');
@@ -33,37 +33,22 @@ test('cannot submit with empty fields', async () => {
   await expect(findByLabelText('Last name is too short')).toBeTruthy();
 });
 
-test('test cannot sign up with invalid password format', async () => {
-  const formInput: FormState = {
-    email: 'random@random.com',
-    password: 'random'
-  };
-  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
-
-  updateFormWith({ values: formInput, getByLabelText });
-
-  fireEvent.press(getByText(/Log in/i));
-
-  await expect(findByLabelText('Invalid Password format')).toBeTruthy();
-  await expect(findByLabelText('Password does not match')).toBeTruthy();
-});
-
 test('test can sign up', async () => {
   const body = {
     user: {
       id: 1,
       first_name: 'random',
       last_name: 'random',
-      email: 'random@random.com',
+      email: 'random@random.com'
     },
     auth_token: 'faslfuad_random_fasd',
-    message: 'success',
+    message: 'success'
   };
   fetch.mockReturnValue(Promise.resolve(new Response(JSON.stringify(body))));
 
   const formInput: FormState = {
     email: 'random@random.com',
-    password: 'R#and0m'
+    password: 'R#and0m',
   };
   const { getByLabelText, getByText, findByText } = renderWithNavigation(components);
 
@@ -72,26 +57,4 @@ test('test can sign up', async () => {
   fireEvent.press(getByText(/Log in/i));
 
   await expect(findByText(/Board/i)).toBeTruthy();
-});
-
-test('renders api form validation errors', async () => {
-  const errors = {
-    password: ['wrong password'],
-  };
-  const fetchResponse = {
-    ok: false,
-    json: () => Promise.resolve({ errors }),
-  };
-  fetch.mockReturnValue(Promise.resolve(fetchResponse));
-
-  const formInput: FormState = {
-    email: 'random@random.com',
-    password: 'R#and0m'
-  };
-  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
-
-  updateFormWith({ values: formInput, getByLabelText });
-
-  fireEvent.press(getByText(/Log in/i));
-  await expect(findByLabelText('wrong password')).toBeTruthy();
 });

@@ -90,7 +90,7 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
       });
     }
   },
-  LogInWithEmail: async (info: Partial<{ password: string; email: string }>) => {
+  logInWithEmail: async (info: Partial<{ password: string; email: string }>) => {
     dispatch({ type: AuthTypes.LOADING });
 
     try {
