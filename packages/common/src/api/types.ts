@@ -5,8 +5,10 @@ export type User = {
   email: string;
 };
 
-export type UserResponse = {
+export type RegisterResponse = {
   user: User;
   message: string;
   auth_token: string;
 };
+
+export type LoginResponse = RegisterResponse;

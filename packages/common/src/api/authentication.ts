@@ -1,5 +1,5 @@
 import { default as fire } from 'node-fetch';
-import { UserResponse, User } from './types';
+import { RegisterResponse, LoginResponse, User } from './types';
 import { Platform } from 'react-native';
 import Config from './../utils/constants';
 
@@ -12,7 +12,7 @@ if (Platform.OS !== 'web') {
   fetch = window.fetch;
 }
 
-export const register = async (user: Partial<User>): Promise<UserResponse> => {
+export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
   const response = await fetch(`${API_URL}${'/users'}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -28,7 +28,7 @@ export const register = async (user: Partial<User>): Promise<UserResponse> => {
   return json;
 };
 
-export const login = async (user: Partial<{ password: string; email: string }>): Promise<UserResponse> => {
+export const login = async (user: Partial<{ password: string; email: string }>): Promise<LoginResponse> => {
   // To be updated
   const response = await fetch(`${API_URL}${'/login'}`, {
     method: 'POST',
