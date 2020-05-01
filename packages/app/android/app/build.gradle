@@ -76,7 +76,6 @@ project.ext.react = [
     bundleAssetName: "index.android.bundle",
     cliPath: "../../../../node_modules/react-native/local-cli/cli.js",
     entryFile: "packages/app/index.js",
-    entryFile: "index.js",
     enableHermes: false
 ]
 
