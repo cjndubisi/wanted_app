@@ -4,7 +4,7 @@ import { fireEvent } from '@testing-library/react-native';
 import React from 'react';
 import { create } from 'react-test-renderer';
 import EmailLogin, { FormState } from '../../LogInWithEmail';
-import { renderWithNavigation, updateFormWith, withNavigation, withProviders } from '../utils';
+import { render, updateFormWith, withStackNavigation } from "../utils";
 import { default as fetcher } from 'node-fetch';
 import { Routes } from '../../../router';
 import Home from '../../Home';
@@ -18,15 +18,11 @@ const components = {
 };
 
 it('renders correctly', () => {
-  const EmailNavigation = withNavigation(components);
-  const Auth = withProviders(EmailNavigation);
-  const tree = create(<Auth />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expect(render(withStackNavigation(components)).container).toMatchSnapshot();
 });
 
 test('cannot submit with empty fields', async () => {
-  const { findByLabelText, getByText } = renderWithNavigation(components);
+  const { findByLabelText, getByText } = render(withStackNavigation(components));
 
   fireEvent.press(getByText(/Log in/i));
 
@@ -50,7 +46,7 @@ test('test can sign up', async () => {
     email: 'random@random.com',
     password: 'R#and0m',
   };
-  const { getByLabelText, getByText, findByText } = renderWithNavigation(components);
+  const { getByLabelText, getByText, findByText } = render(withStackNavigation(components));
 
   updateFormWith({ values: formInput, getByLabelText });
 

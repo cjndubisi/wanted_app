@@ -1,10 +1,7 @@
 jest.mock('node-fetch');
-
-import { fireEvent } from '@testing-library/react-native';
-import React from 'react';
-import { create } from 'react-test-renderer';
+import React from 'react'
 import EmailSignup, { FormState } from '../../SignUpWithEmail';
-import { renderWithNavigation, updateFormWith, withNavigation, withProviders } from "../utils";
+import { updateFormWith, render, withStackNavigation, fireEvent } from "../utils";
 import { default as fetcher } from 'node-fetch';
 import { Routes } from "../../../router";
 import Home from '../../Home';
@@ -18,15 +15,11 @@ const components = {
 };
 
 it('renders correctly', () => {
-  const EmailNavigation = withNavigation(components);
-  const Auth = withProviders(EmailNavigation);
-  const tree = create(<Auth />).toJSON();
-
-  expect(tree).toMatchSnapshot();
+  expect(render(withStackNavigation(components)).container).toMatchSnapshot();
 });
 
 test('cannot submit with empty fields', async () => {
-  const { findByLabelText, getByText } = renderWithNavigation(components);
+  const { findByLabelText, getByText } = render(withStackNavigation(components));
 
   fireEvent.press(getByText(/Sign up with email/i));
 
@@ -41,7 +34,7 @@ test('test cannot sign up with invalid password format', async () => {
     password: 'random',
     confirm_password: 'random1',
   };
-  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
+  const { getByLabelText, getByText, findByLabelText } = render(withStackNavigation(components));
 
   updateFormWith({ values: formInput, getByLabelText });
 
@@ -57,10 +50,10 @@ test('test can sign up', async () => {
       id: 1,
       first_name: 'random',
       last_name: 'random',
-      email: 'random@random.com',
+      email: 'random@random.com'
     },
     auth_token: 'faslfuad_random_fasd',
-    message: 'success',
+    message: 'success'
   };
   fetch.mockReturnValue(Promise.resolve(new Response(JSON.stringify(body))));
 
@@ -69,9 +62,9 @@ test('test can sign up', async () => {
     last_name: 'random',
     email: 'random@random.com',
     password: 'R#and0m',
-    confirm_password: 'R#and0m',
+    confirm_password: 'R#and0m'
   };
-  const { getByLabelText, getByText, findByText } = renderWithNavigation(components);
+  const { getByLabelText, getByText, findByText } = render(withStackNavigation(components));
 
   updateFormWith({ values: formInput, getByLabelText });
 
@@ -95,9 +88,9 @@ test('renders api form validation errors', async () => {
     last_name: 'random',
     email: 'random@random.com',
     password: 'R#and0m',
-    confirm_password: 'R#and0m',
+    confirm_password: 'R#and0m'
   };
-  const { getByLabelText, getByText, findByLabelText } = renderWithNavigation(components);
+  const { getByLabelText, getByText, findByLabelText } = render(withStackNavigation(components));
 
   updateFormWith({ values: formInput, getByLabelText });
 

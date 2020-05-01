@@ -4,50 +4,6 @@ import { BaseNavigationContainer } from '@react-navigation/core';
 import { fireEvent, render } from '@testing-library/react-native';
 import { AuthProvider } from '../../context/AuthContext';
 
-export const withNavigation = ({
-  screens = {},
-}: {
-  screens: { [component: string]: { component: any; path: string } };
-}) => {
-  return class extends React.Component {
-    render() {
-      const Stack = createStackNavigator();
-
-      return (
-        <BaseNavigationContainer>
-          <Stack.Navigator>
-            {Object.keys(screens).map(name => (
-              <Stack.Screen
-                key={name}
-                name={screens[name].path}
-                component={screens[name].component}
-              />
-            ))}
-          </Stack.Navigator>
-        </BaseNavigationContainer>
-      );
-    }
-  };
-};
-
-export const withProviders = (Component: any) => {
-  return class extends React.Component {
-    render() {
-      return (
-        <AuthProvider>
-          <Component />
-        </AuthProvider>
-      );
-    }
-  };
-};
-
-export const renderWithNavigation = ({ screens = {} }) => {
-  const NavigationComponent = withNavigation({ screens });
-  const Component = withProviders(NavigationComponent);
-  return { ...render(<Component />) };
-};
-
 export const updateFormWith = ({ values, getByLabelText }) => {
   const formInput = values;
   const elements = Object.keys(formInput).reduce((acc, name) => {
@@ -58,3 +14,42 @@ export const updateFormWith = ({ values, getByLabelText }) => {
     fireEvent.changeText(elements[item], formInput[item]);
   });
 };
+
+export const withStackNavigation = ({
+  screens = {},
+}: {
+  screens: { [component: string]: { component: any; path: string } };
+}) => {
+  const Stack = createStackNavigator();
+
+  return (
+    <BaseNavigationContainer>
+      <Stack.Navigator>
+        {Object.keys(screens).map(name => (
+          <Stack.Screen
+            key={name}
+            name={screens[name].path}
+            component={screens[name].component}
+          />
+        ))}
+      </Stack.Navigator>
+    </BaseNavigationContainer>
+  );
+};
+
+export const AllProviders = ({ children }) => {
+  return (
+    <AuthProvider>
+      {children}
+    </AuthProvider>)
+};
+
+
+const customRender = (ui, options = {}) =>
+  render(ui, { wrapper: AllProviders, ...options });
+
+// re-export everything
+export * from '@testing-library/react-native'
+
+// override render method
+export { customRender as render }
