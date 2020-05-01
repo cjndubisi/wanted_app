@@ -50,7 +50,7 @@ ios/Pods/*
 **/app/fastlane/report.xml
 
 **/.bundle/
-
+*.deps
 packages/app/ios/main.jsbundle
 packages/app/ios/assets
 packages/web/build
