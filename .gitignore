@@ -58,6 +58,9 @@ packages/web/build
 **/android/.gradle/*
 **/build/
 local.properties
+signing.properties
+*.keystore
+
 # macOS
 .DS_Store
 .idea
