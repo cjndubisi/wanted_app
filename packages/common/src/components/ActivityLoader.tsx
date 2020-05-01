@@ -4,6 +4,9 @@ import { ActivityIndicator, ActivityIndicatorProps, Dimensions, View } from 'rea
 let width = Dimensions.get('window').width;
 let height = Dimensions.get('window').height;
 export default ({ animating }: ActivityIndicatorProps) => {
+  if (!animating) {
+    return null;
+  }
   return (
     <View
       style={{
