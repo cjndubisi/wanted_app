@@ -5,7 +5,7 @@ import { ActivityLoader, Button } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
 import { Container, H1, InputCaption, Label, Text, ErrorLabel, Input } from '../../styled';
 import formConfig from './formConfig';
-import { Routes } from "../../router";
+import { Routes } from '../../router';
 
 export type FormState = Partial<User & { password: string; confirm_password: string }>;
 export type FormErrorState = { [T in keyof FormState]: string };

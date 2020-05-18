@@ -73,7 +73,7 @@ export default ({ navigation }) => {
                 flex: 1,
                 display: 'flex',
                 justifyContent: 'space-between',
-                flexDirection: 'row',
+                flexDirection: 'row'
               }}
             >
               <Label bold>{input.placeholder}</Label>

@@ -1,6 +1,6 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { login, register } from "../api";
+import { login, register } from '../api';
 import { User } from '../api/types';
 import createDataContext from './createDataProvider';
 const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';

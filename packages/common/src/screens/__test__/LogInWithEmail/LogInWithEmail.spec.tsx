@@ -1,8 +1,7 @@
 jest.mock('node-fetch');
 
-import { fireEvent } from '@testing-library/react-native';
+import { fireEvent, wait } from "@testing-library/react-native";
 import React from 'react';
-import { create } from 'react-test-renderer';
 import EmailLogin, { FormState } from '../../LogInWithEmail';
 import { render, updateFormWith, withStackNavigation } from "../utils";
 import { default as fetcher } from 'node-fetch';
@@ -13,23 +12,41 @@ const { Response } = jest.requireActual('node-fetch');
 const components = {
   screens: {
     EmailLogin: { component: EmailLogin, path: Routes.EmailLogin.path },
-    Home: { component: Home, path: Routes.Home.path },
-  },
+    Home: { component: Home, path: Routes.Home.path }
+  }
 };
+
+// test shows splash when auth token is null
+// - set auth token to be nil
+// - render
+// - expect splash is visible
+//
+// test home is displayed with auth is valid
+// - set auth token to be valid
+// - render
+// - expect home is visible
+//
+// test can login
+// - render
+// - tap login with email
+// - fill form
+// - tap login
+// - expect him to be visible
+// - expect login to hidden
 
 it('renders correctly', () => {
   expect(render(withStackNavigation(components)).container).toMatchSnapshot();
 });
 
-test('cannot submit with empty fields', async () => {
-  const { findByLabelText, getByText } = render(withStackNavigation(components));
+// test('cannot submit with wrong email format', async () => {
+//   const { queryByText, getByText } = render(withStackNavigation(components));
+//
+//   fireEvent.press(getByText(/Log in/i));
+//   await wait(() => expect(queryByText('Email is invalid')).toBeTruthy())
+//
+// });
 
-  fireEvent.press(getByText(/Log in/i));
-
-  await expect(findByLabelText('Last name is too short')).toBeTruthy();
-});
-
-test('test can sign up', async () => {
+test('can sign in', async () => {
   const body = {
     user: {
       id: 1,
