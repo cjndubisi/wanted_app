@@ -79,7 +79,7 @@ platform :ios do
 
   desc 'Ship to AppCenter'
   lane :alpha do
-    return unless ['develop', 'master'].include? git_branch
+    skip unless ['develop', 'master'].include? git_branch
 
     build
     appcenter_upload(
