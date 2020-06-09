@@ -26,20 +26,25 @@ Fetch certificates and provisioning profiles
 fastlane ios bundle_ios
 ```
 
-### ios beta
+### ios alpha
 ```
-fastlane ios beta
+fastlane ios alpha
 ```
-Ship to Testflight.
+Ship to AppCenter
 
 ----
 
 ## Android
-### android beta
+### android alpha
 ```
-fastlane android beta
+fastlane android alpha
 ```
-Ship to Playstore Beta.
+Ship to AppCenter
+### android build_keystore
+```
+fastlane android build_keystore
+```
+
 
 ----
 

@@ -2,6 +2,7 @@
   "name": "wanted-mobile",
   "version": "0.0.1",
   "scripts": {
+    "compile": "tsc -b --incremental",
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator='iPhone 11 Pro'",
@@ -9,7 +10,11 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.9.0",
     "@react-native-community/masked-view": "^0.1.7",
+    "@react-navigation/core": "^5.3.3",
+    "@react-navigation/native": "^5.1.5",
+    "@react-navigation/stack": "^5.2.10",
     "@types/jest": "^25.1.4",
     "@wanted/common": "0.1.0",
     "appcenter": "^3.0.2",
@@ -22,6 +27,7 @@
     "react-native-gesture-handler": "^1.5.6",
     "react-native-reanimated": "^1.4.0",
     "react-native-safe-area-context": "^0.7.3",
+    "react-native-screens": "^2.4.0",
     "react-native-unimodules": "~0.7.0",
     "react-native-web": "~0.11.7",
     "styled-components": "^5.0.1"

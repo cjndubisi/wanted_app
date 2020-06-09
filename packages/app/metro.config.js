@@ -23,12 +23,6 @@ const modules = [
 
 module.exports = {
   projectRoot: root,
-
-  // We need to watch the root of the monorepo
-  // This lets Metro find the monorepo packages automatically using haste
-  // This also lets us import modules from monorepo root
-  watchFolders: [root],
-
   resolver: {
     // When we import a package from the monorepo, metro won't be able to find their deps
     // We need to specify them in `extraNodeModules` to tell metro where to find them

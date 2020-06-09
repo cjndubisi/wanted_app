@@ -77,16 +77,17 @@ platform :ios do
     )
   end
 
-  desc 'Ship to Testflight.'
-  lane :beta do
+  desc 'Ship to AppCenter'
+  lane :alpha do
     return unless ['develop', 'master'].include? git_branch
 
     build
     appcenter_upload(
       api_token: ENV["APPCENTER_API_TOKEN"],
-      owner_name: ENV["APPCENTER_OWNER_NAME"],
-      app_name: ENV["APPCENTER_APP_NAME"],
+      owner_name: 'cjndubisi',
+      app_name: 'Hoshi',
       notify_testers: true,
+      app_os: 'iOS',
       dsym: ENV["FASTLANE_OUTPUT_DIRECTORY"],
       ipa: ENV["FASTLANE_OUTPUT_DIRECTORY"]
     )
@@ -125,15 +126,36 @@ platform :android do
 
   desc 'Build the Android application.'
   private_lane :build do
+    gradle(task: "incrementVersionCode", project_dir: "android/")
     gradle(task: 'clean', project_dir: 'android/')
     gradle(task: 'assemble', build_type: 'Release', project_dir: 'android/')
   end
 
-  desc 'Ship to Playstore Beta.'
-  lane :beta do
+  desc 'Ship to AppCenter'
+  lane :alpha do
+    build_keystore
     build
-    supply(track: 'beta', track_promote_to: 'beta')
-    git_commit(path: ['./android/gradle.properties'], message: 'Bump versionCode')
-    push_to_git_remote
+    appcenter_upload(
+      api_token: ENV["APPCENTER_API_TOKEN"],
+      owner_name: 'cjndubisi',
+      app_name: 'Hoshi',
+      app_platform: 'Java',
+      app_os: 'Android',
+      notify_testers: true,
+      file: './android/app/build/outputs/apk/release/app-release.apk'
+    )
+    git_commit(path: ['./android/gradle.properties'], message: '[skip ci] Bump versionCode')
+    push_to_git_remote(
+      remote_branch: git_branch,
+      tags: false
+    )
+  end
+
+  lane :build_keystore do 
+    sh 'echo $RELEASE_KEY_STORE | base64 -d > ../android/app/wanted-android-releasekey.keystore'
+    sh 'echo "APP_RELEASE_STORE_FILE=wanted-android-releasekey.keystore" >> ../android/signing.properties'
+    sh 'echo "APP_RELEASE_KEY_ALIAS=$RELEASE_KEYSTORE_KEY_ALIAS" >> ../android/signing.properties'
+    sh 'echo "APP_RELEASE_STORE_PASSWORD=$RELEASE_KEYSTORE_STORE_PASSWORD" >> ../android/signing.properties'
+    sh 'echo "APP_RELEASE_KEY_PASSWORD=$RELEASE_KEYSTORE_KEY_PASSWORD" >> ../android/signing.properties'
   end
 end
