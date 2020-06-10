@@ -14,7 +14,6 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
 
   const json = await response.json();
   if (!response.ok) {
-    debugger;
     const errors = json.errors;
     throw new Error(JSON.stringify(errors));
   }

@@ -47,9 +47,9 @@ export default ({ navigation }) => {
     setShowingAPIError(false);
     await signUpWithEmail(request);
   };
-
   if (state.error && !showingAPIError) {
     const error = state.error;
+
     let viewError = { other: '' };
     Object.keys(error).forEach((key) => {
       // does the key match any form field
