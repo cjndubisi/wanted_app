@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../components/Button';
 import { Container, Footer, Text, Title } from '../styled';
+import { Routes } from '../router';
 
 export default ({ navigation }) => {
   const emailAuthFlow = () => {
-    navigation.navigate('/authenticating');
+    navigation.navigate(Routes.EmailSignup.path);
+  };
+
+  const emailLoginFlow = () => {
+    navigation.navigate(Routes.EmailLogin.path);
   };
   return (
     <Container>
@@ -14,7 +19,15 @@ export default ({ navigation }) => {
         <Button
           bold
           backgroundColor="brown"
-          title="Continue with Email"
+          title="Log in with Email"
+          titleColor="white"
+          onPress={emailLoginFlow}
+        />
+
+        <Button
+          bold
+          backgroundColor="brown"
+          title="Sign up with Email"
           titleColor="white"
           onPress={emailAuthFlow}
         />

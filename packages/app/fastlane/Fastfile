@@ -2,19 +2,19 @@ fastlane_version "2.141.0"
 
 before_all do
   ensure_git_status_clean(show_uncommitted_changes: true) if is_ci?
-  if is_ci?
+  if is_ci? && is_ios?
     create_ci_keychain
   end
 end
 
 after_all do |lane, options|
-  if is_ci?
+  if is_ci? && is_ios?
     delete_ci_keychain
   end
 end
 
 error do |lane, exception|
-  if is_ci?
+  if is_ci? && is_ios?
     delete_ci_keychain
   end
 end
@@ -27,6 +27,10 @@ private_lane :options_for_branch do | options |
     match_profile_name: git_branch == 'master' ? 'match AppStore wanted.app.ios' : 'match AdHoc wanted.app.ios'
   }
 end
+
+ def is_ios? 
+  ENV["FASTLANE_PLATFORM_NAME"] == 'ios'
+ end 
 
 platform :ios do
   # iOS Lanes
@@ -79,7 +83,7 @@ platform :ios do
 
   desc 'Ship to AppCenter'
   lane :alpha do
-    return unless ['develop', 'master'].include? git_branch
+    next unless ['develop', 'master'].include? git_branch
 
     build
     appcenter_upload(
@@ -152,7 +156,7 @@ platform :android do
   end
 
   lane :build_keystore do 
-    sh 'echo $RELEASE_KEY_STORE | base64 -d > ../android/app/wanted-android-releasekey.keystore'
+    sh 'echo $RELEASE_KEY_STORE | base64 -D > ../android/app/wanted-android-releasekey.keystore'
     sh 'echo "APP_RELEASE_STORE_FILE=wanted-android-releasekey.keystore" >> ../android/signing.properties'
     sh 'echo "APP_RELEASE_KEY_ALIAS=$RELEASE_KEYSTORE_KEY_ALIAS" >> ../android/signing.properties'
     sh 'echo "APP_RELEASE_STORE_PASSWORD=$RELEASE_KEYSTORE_STORE_PASSWORD" >> ../android/signing.properties'

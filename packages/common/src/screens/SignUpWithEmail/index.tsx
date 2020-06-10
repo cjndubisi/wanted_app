@@ -3,9 +3,9 @@ import { Platform, View, Keyboard } from 'react-native';
 import { User } from '../../api/types';
 import { ActivityLoader, Button, DismissKeyboard } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
-import { Container, H1, InputCaption, Label, Text } from '../../styled';
+import { Container, H1, InputCaption, Label, Text, ErrorLabel, Input } from '../../styled';
 import formConfig from './formConfig';
-import { ErrorLabel, Input } from './styled';
+import { Routes } from '../../router';
 
 export type FormState = Partial<User & { password: string; confirm_password: string }>;
 export type FormErrorState = { [T in keyof FormState]: string };
@@ -16,12 +16,12 @@ export default ({ navigation }) => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});
-  // To prevent rendering page, as cannot dispatch { error: null } to contect from here
+  // To prevent rendering page, as cannot dispatch { error: null } to connect from here
   const [showingAPIError, setShowingAPIError] = useState<boolean>(false);
 
   useEffect(() => {
     if (state.isSignedIn) {
-      navigation.navigate('/board');
+      navigation.navigate(Routes.Home.path);
     }
   }, [state.isSignedIn]);
 
@@ -47,10 +47,9 @@ export default ({ navigation }) => {
     setShowingAPIError(false);
     await signUpWithEmail(request);
   };
-
   if (state.error && !showingAPIError) {
-    const error = state.error;
-    let viewError = { other: '' };
+    const error = state.error?.error || state.error;
+    let viewError: any = {};
     Object.keys(error).forEach((key) => {
       // does the key match any form field
       if (info[key] !== undefined) {
@@ -75,7 +74,7 @@ export default ({ navigation }) => {
             <H1>Wanted</H1>
             <Text>Create an account buy and sell services, product, jobs and more.</Text>
           </View>
-          <ErrorLabel>{}</ErrorLabel>
+          <ErrorLabel style={{ fontSize: 16, height: 30 }}>{formError['other']}</ErrorLabel>
           {formConfig.map((input) => (
             <View style={{ marginBottom: 12 }} key={`input_${input.key}`}>
               <View

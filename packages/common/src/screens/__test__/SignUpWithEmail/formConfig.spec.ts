@@ -1,4 +1,4 @@
-import formConfig from './../SignUpWithEmail/formConfig';
+import formConfig from './../../SignUpWithEmail/formConfig';
 
 describe('Form Validation Exceptions', () => {
   test('First name should be more than 2', () => {

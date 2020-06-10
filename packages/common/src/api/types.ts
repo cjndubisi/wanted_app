@@ -10,3 +10,5 @@ export type RegisterResponse = {
   message: string;
   auth_token: string;
 };
+
+export type LoginResponse = RegisterResponse;

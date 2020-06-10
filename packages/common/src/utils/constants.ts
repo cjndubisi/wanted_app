@@ -15,7 +15,6 @@ const envKeys = Object.keys(env)
     return item.indexOf('REACT_APP_') !== -1;
   })
   .reduce((acc, next) => {
-    console.log(acc, next, next.replace('REACT_APP_', ''));
     acc[next.replace('REACT_APP_', '')] = env[next];
     return acc;
   }, {});

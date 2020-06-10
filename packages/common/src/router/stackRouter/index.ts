@@ -6,5 +6,4 @@ const native = Platform.select({
   default: () => require('./stackRouter.web'),
 })();
 
-console.log('nansns', native);
 export default native;
