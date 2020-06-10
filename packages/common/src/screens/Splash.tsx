@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Button from '../components/Button';
 import { Container, Footer, Text, Title } from '../styled';
-import { Routes } from '../router'
+import { Routes } from '../router';
 
 export default ({ navigation }) => {
   const emailAuthFlow = () => {

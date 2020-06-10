@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Platform, View } from 'react-native';
+import { Platform, View, Keyboard } from 'react-native';
 import { ActivityLoader, Button } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
 import { Container, H1, Label, Text, ErrorLabel, Input } from '../../styled';
@@ -24,7 +24,13 @@ export default ({ navigation }) => {
   }, [state.isSignedIn]);
 
   const login = async () => {
-    const errors: FormErrorState = formConfig.reduce((acc) => {
+    Keyboard.dismiss();
+    const errors: FormErrorState = formConfig.reduce((acc, next) => {
+      const error = next.validation(info);
+      // update empty object only if error exist
+      if (error !== '') {
+        acc[next.key as keyof FormErrorState] = error;
+      }
       return acc;
     }, {} as FormErrorState);
 
@@ -40,9 +46,10 @@ export default ({ navigation }) => {
   };
 
   if (state.error && !showingAPIError) {
-    const error = state.error;
-    let viewError = { other: '' };
-    Object.keys(error).forEach(key => {
+    const error = state.error?.error || state.error;
+    let viewError: any = {};
+
+    Object.keys(error).forEach((key) => {
       // does the key match any form field
       if (info[key] !== undefined) {
         viewError[key] = error[key][0];
@@ -50,7 +57,7 @@ export default ({ navigation }) => {
     });
 
     if (Object.keys(viewError).length === 0) {
-      viewError.other = error?.[0] ?? error.message;
+      viewError.other = error.message || 'Something went wrong!!';
     }
     setFormError({ ...formError, ...viewError });
     // Prevent render cause by setFormError
@@ -65,15 +72,13 @@ export default ({ navigation }) => {
           <H1>Wanted</H1>
           <Text>Create an account buy and sell services, product, jobs and more.</Text>
         </View>
-        <ErrorLabel>{}</ErrorLabel>
-        {formConfig.map(input => (
+        <ErrorLabel style={{ fontSize: 16, height: 30 }}>{formError['other']}</ErrorLabel>
+        {formConfig.map((input) => (
           <View style={{ marginBottom: 12 }} key={`input_${input.key}`}>
             <View
               style={{
-                flex: 1,
-                display: 'flex',
                 justifyContent: 'space-between',
-                flexDirection: 'row'
+                flexDirection: 'row',
               }}
             >
               <Label bold>{input.placeholder}</Label>
@@ -93,13 +98,7 @@ export default ({ navigation }) => {
             />
           </View>
         ))}
-        <Button
-          bold
-          title="Log in"
-          onPress={login}
-          titleColor="white"
-          backgroundColor="brown"
-        />
+        <Button bold title="Log in" onPress={login} titleColor="white" backgroundColor="brown" />
       </View>
     </Container>
   );

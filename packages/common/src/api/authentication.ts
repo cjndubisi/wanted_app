@@ -5,7 +5,6 @@ import Config from './../utils/constants';
 const { API_URL } = Config;
 
 export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
-  debugger;
   const response = await fetch(`${API_URL}${'/users'}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,10 +13,8 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
 
   const json = await response.json();
   if (!response.ok) {
-    const errors = json.errors;
-    throw new Error(JSON.stringify(errors));
+    throw json.errors || json;
   }
-  debugger;
   return json;
 };
 
@@ -25,7 +22,7 @@ export const login = async (
   user: Partial<{ password: string; email: string }>
 ): Promise<LoginResponse> => {
   // To be updated
-  const response = await fetch(`${API_URL}${'/login'}`, {
+  const response = await fetch(`${API_URL}${'/users/login'}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user),
@@ -33,8 +30,7 @@ export const login = async (
 
   const json = await response.json();
   if (!response.ok) {
-    const errors = json.errors;
-    throw new Error(JSON.stringify(errors));
+    throw json.errors || json;
   }
 
   return json;

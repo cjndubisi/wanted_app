@@ -48,9 +48,8 @@ export default ({ navigation }) => {
     await signUpWithEmail(request);
   };
   if (state.error && !showingAPIError) {
-    const error = state.error;
-
-    let viewError = { other: '' };
+    const error = state.error?.error || state.error;
+    let viewError: any = {};
     Object.keys(error).forEach((key) => {
       // does the key match any form field
       if (info[key] !== undefined) {
@@ -75,7 +74,7 @@ export default ({ navigation }) => {
             <H1>Wanted</H1>
             <Text>Create an account buy and sell services, product, jobs and more.</Text>
           </View>
-          <ErrorLabel>{}</ErrorLabel>
+          <ErrorLabel style={{ fontSize: 16, height: 30 }}>{formError['other']}</ErrorLabel>
           {formConfig.map((input) => (
             <View style={{ marginBottom: 12 }} key={`input_${input.key}`}>
               <View

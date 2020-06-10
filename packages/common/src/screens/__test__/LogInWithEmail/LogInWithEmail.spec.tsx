@@ -1,9 +1,9 @@
 jest.mock('node-fetch');
 
-import { fireEvent, wait } from "@testing-library/react-native";
+import { fireEvent, wait } from '@testing-library/react-native';
 import React from 'react';
 import EmailLogin, { FormState } from '../../LogInWithEmail';
-import { render, updateFormWith, withStackNavigation } from "../utils";
+import { render, updateFormWith, withStackNavigation } from '../utils';
 import { default as fetcher } from 'node-fetch';
 import { Routes } from '../../../router';
 import Home from '../../Home';
@@ -12,8 +12,8 @@ const { Response } = jest.requireActual('node-fetch');
 const components = {
   screens: {
     EmailLogin: { component: EmailLogin, path: Routes.EmailLogin.path },
-    Home: { component: Home, path: Routes.Home.path }
-  }
+    Home: { component: Home, path: Routes.Home.path },
+  },
 };
 
 // test shows splash when auth token is null
@@ -52,10 +52,10 @@ test('can sign in', async () => {
       id: 1,
       first_name: 'random',
       last_name: 'random',
-      email: 'random@random.com'
+      email: 'random@random.com',
     },
     auth_token: 'faslfuad_random_fasd',
-    message: 'success'
+    message: 'success',
   };
   fetch.mockReturnValue(Promise.resolve(new Response(JSON.stringify(body))));
 
