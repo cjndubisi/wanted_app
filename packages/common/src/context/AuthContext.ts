@@ -3,6 +3,8 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { login, register } from '../api';
 import { User } from '../api/types';
 import createDataContext from './createDataProvider';
+import { LoginManager } from 'react-native-fbsdk';
+
 const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';
 
 interface State {
@@ -57,6 +59,7 @@ const authReducer: AuthReducer = (prevState, action) => {
 
 const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
   tryToLogin: async () => {
+    await AsyncStorage.clear();
     const auth_token = await AsyncStorage.getItem(AUTH_USER_TOKEN_KEY);
     if (auth_token) {
       dispatch({
@@ -110,6 +113,19 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
         type: AuthTypes.AUTH_FAILURE,
         payload: error,
       });
+    }
+  },
+  loginWithFacebook: async () => {
+    dispatch({ type: AuthTypes.LOADING });
+
+    try {
+      const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+      if (result.isCancelled) return;
+      console.log(result);
+
+      alert('Login was successful with permissions: ' + result.grantedPermissions.toString());
+    } catch (error) {
+      alert('Login failed with error: ' + error);
     }
   },
 });

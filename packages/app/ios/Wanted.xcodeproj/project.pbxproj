@@ -14,6 +14,7 @@
 		41F71B89CFBBC26DEC615C29 /* libPods-Wanted.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2524C4C2FE00B940904A648C /* libPods-Wanted.a */; };
 		4F73E1E024560BE400B39D4A /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4F73E1DF24560BE400B39D4A /* AppCenter-Config.plist */; };
 		4F73E1E22456CD7000B39D4A /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
+		4F9788F8249271AC0052BB20 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F9788F7249271AC0052BB20 /* File.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B47C5AFCB8BDE514B7D1AC6 /* Pods-Wanted.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wanted.debug.xcconfig"; path = "Target Support Files/Pods-Wanted/Pods-Wanted.debug.xcconfig"; sourceTree = "<group>"; };
 		4F73E1DF24560BE400B39D4A /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "Wanted/AppCenter-Config.plist"; sourceTree = "<group>"; };
+		4F9788F7249271AC0052BB20 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		8AC623DBF3A3E2CB072F81F2 /* Pods-Wanted.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Wanted.release.xcconfig"; path = "Target Support Files/Pods-Wanted/Pods-Wanted.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -57,6 +59,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				4F9788F7249271AC0052BB20 /* File.swift */,
 			);
 			name = Wanted;
 			sourceTree = "<group>";
@@ -123,6 +126,7 @@
 				FD4C38642228810C00325AF5 /* Start Packager */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				36D533137CDFF3647475D970 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -144,6 +148,7 @@
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = M9399PEWF4;
+						LastSwiftMigration = 1140;
 						ProvisioningStyle = Manual;
 					};
 				};
@@ -196,6 +201,24 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\nexport PROJECT_ROOT=\"$PROJECT_DIR/..\"\nexport EXTRA_PACKAGER_ARGS=\"--entry-file packages/app/index.js\"\n../../../node_modules/react-native/scripts/react-native-xcode.sh packages/app/index.js\n";
 		};
+		36D533137CDFF3647475D970 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Wanted/Pods-Wanted-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Wanted/Pods-Wanted-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		F8BC737F2AD7A05944D9E2A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -245,6 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				4F9788F8249271AC0052BB20 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +293,7 @@
 			baseConfigurationReference = 3B47C5AFCB8BDE514B7D1AC6 /* Pods-Wanted.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
@@ -284,6 +309,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = wanted.app.ios;
 				PRODUCT_NAME = Wanted;
 				PROVISIONING_PROFILE_SPECIFIER = "match Development wanted.app.ios";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -293,6 +320,7 @@
 			baseConfigurationReference = 8AC623DBF3A3E2CB072F81F2 /* Pods-Wanted.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 15;
@@ -307,6 +335,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = wanted.app.ios;
 				PRODUCT_NAME = Wanted;
 				PROVISIONING_PROFILE_SPECIFIER = "match AppStore wanted.app.ios";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
