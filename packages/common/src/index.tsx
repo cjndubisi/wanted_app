@@ -1,7 +1,7 @@
 import { NavigationContainerRef, useLinking, InitialState } from '@react-navigation/native';
 import React from 'react';
 import { AuthProvider } from './context/AuthContext';
-import { Routes as ROUTES, Stack } from "./router";
+import { Routes as ROUTES, Stack } from './router';
 import { Platform, AsyncStorage } from 'react-native';
 
 export default () => {
@@ -56,9 +56,15 @@ export default () => {
   return (
     <AuthProvider>
       <Stack.NavigationContainer initialState={initialState}>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName="AuthResolver">
           {(Object.keys(ROUTES) as (keyof typeof ROUTES)[]).map((name) => (
-            <Stack.Screen key={name} name={ROUTES[name].path} exact {...ROUTES[name]} />
+            <Stack.Screen
+              key={name}
+              options={ROUTES[name].options || {}}
+              name={ROUTES[name].path}
+              exact
+              {...ROUTES[name]}
+            />
           ))}
         </Stack.Navigator>
       </Stack.NavigationContainer>

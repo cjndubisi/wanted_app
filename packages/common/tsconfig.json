@@ -1,5 +1,5 @@
 {
-  // "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.json",
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "jsx": "react",
@@ -19,7 +19,16 @@
     "composite": true,
     "baseUrl": ".",
     "paths": {
-      "*": ["*", "index.web.tsx", "index.native.tsx", "*.web", "*.native", "*"]
+      "*": [
+        "*",
+        "index.web.ts",
+        "index.native.ts",
+        "index.web.tsx",
+        "index.native.tsx",
+        "*.web",
+        "*.native",
+        "*"
+      ]
     }
   },
   "include": ["src", "__mocks__"],

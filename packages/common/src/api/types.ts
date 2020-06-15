@@ -5,10 +5,10 @@ export type User = {
   email: string;
 };
 
-export type RegisterResponse = {
+export type AuthResponse = {
   user: User;
   message: string;
   auth_token: string;
 };
 
-export type LoginResponse = RegisterResponse;
+export type LoginResponse = AuthResponse;

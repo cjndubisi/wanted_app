@@ -3,12 +3,12 @@ import { AuthContext } from '../context/AuthContext';
 
 export default ({ navigation }) => {
   const { state, tryToLogin } = useContext(AuthContext);
-  const { isLoading, isSignedIn } = state;
+  const { isSignedIn } = state;
 
   useEffect(() => {
     const login = async () => {
-      await tryToLogin();
-      if (!isSignedIn) {
+      const didSignin = await tryToLogin();
+      if (!didSignin) {
         navigation.navigate('/');
       }
     };

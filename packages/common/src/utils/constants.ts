@@ -9,6 +9,7 @@ const nativeConfig = Platform.select({
   android: () => require('react-native-config'),
 })();
 
+const inital: { [key: string]: any } = {};
 const env = { ...process.env, ...nativeConfig.default };
 const envKeys = Object.keys(env)
   .filter((item) => {
@@ -17,7 +18,7 @@ const envKeys = Object.keys(env)
   .reduce((acc, next) => {
     acc[next.replace('REACT_APP_', '')] = env[next];
     return acc;
-  }, {});
+  }, inital);
 
 // using ...process.env doesn't work,
 // must manually access API_URL on .env

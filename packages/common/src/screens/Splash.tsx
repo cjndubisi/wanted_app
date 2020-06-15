@@ -1,10 +1,16 @@
 import React, { useEffect, useContext } from 'react';
 import Button from '../components/Button';
 import { Container, Footer, Text, Title } from '../styled';
-import { Routes } from '../router';
+import { Routes, ScreenProps } from '../router';
 import { AuthContext } from '../context/AuthContext';
+import { ActivityLoader } from '../components';
+import { Platform } from 'react-native';
 
-export default ({ navigation }) => {
+const isWeb = Platform.OS == 'web';
+
+export default ({ navigation }: ScreenProps) => {
+  const { state } = React.useContext(AuthContext);
+
   const emailAuthFlow = () => {
     navigation.navigate(Routes.EmailSignup.path);
   };
@@ -17,6 +23,7 @@ export default ({ navigation }) => {
 
   return (
     <Container>
+      <ActivityLoader animating={state.isLoading && !isWeb} />
       <Title>Wanted</Title>
       <Text>Caption To capture buyers and sellers.</Text>
       <Footer>

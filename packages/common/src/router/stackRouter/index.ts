@@ -1,9 +1,10 @@
-import { Platform } from 'react-native';
+export { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { RootStackParamList } from '..';
 
-const native = Platform.select({
-  ios: () => require('./stackRouter.native'),
-  android: () => require('./stackRouter.native'),
-  default: () => require('./stackRouter.web'),
-})();
+const Router = () => {
+  const Stack = createStackNavigator<RootStackParamList>();
 
-export default native;
+  return Stack;
+};
+export const { Navigator, Screen } = Router();

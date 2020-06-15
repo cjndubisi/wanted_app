@@ -1,9 +1,9 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { login, register } from '../api';
-import { User } from '../api/types';
+import { login, register, loginWithFacebookCredentials } from '../api';
+import { User, LoginResponse } from '../api/types';
 import createDataContext from './createDataProvider';
-import { LoginManager } from 'react-native-fbsdk';
+import { LoginManager, AccessToken } from 'react-native-fbsdk';
 
 const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';
 
@@ -57,6 +57,28 @@ const authReducer: AuthReducer = (prevState, action) => {
   }
 };
 
+const loginAction = async (login: Promise<LoginResponse>, dispatch: (value: Action) => void) => {
+  try {
+    const { user, auth_token } = await login;
+    await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
+
+    dispatch({
+      type: AuthTypes.AUTH_SUCCESS,
+      payload: {
+        user,
+        user_token: auth_token,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+
+    dispatch({
+      type: AuthTypes.AUTH_FAILURE,
+      payload: JSON.parse(error.message),
+    });
+  }
+};
+
 const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
   tryToLogin: async () => {
     await AsyncStorage.clear();
@@ -69,70 +91,28 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
         },
       });
     }
+    return !!auth_token;
   },
   signUpWithEmail: async (info: Partial<User & { password: string }>) => {
     dispatch({ type: AuthTypes.LOADING });
-
-    const request = info;
-    try {
-      const { user, auth_token } = await register(request);
-
-      await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
-
-      dispatch({
-        type: AuthTypes.AUTH_SUCCESS,
-        payload: {
-          user,
-          user_token: auth_token,
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: AuthTypes.AUTH_FAILURE,
-        payload: JSON.parse(error.message),
-      });
-    }
+    await loginAction(register(info), dispatch);
   },
   logInWithEmail: async (info: Partial<{ password: string; email: string }>) => {
     dispatch({ type: AuthTypes.LOADING });
-
-    try {
-      const { user, auth_token } = await login(info);
-
-      await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
-
-      dispatch({
-        type: AuthTypes.AUTH_SUCCESS,
-        payload: {
-          user,
-          user_token: auth_token,
-        },
-      });
-    } catch (error) {
-      dispatch({
-        type: AuthTypes.AUTH_FAILURE,
-        payload: error,
-      });
-    }
+    await loginAction(login(info), dispatch);
   },
   loginWithFacebook: async () => {
+    const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
+    if (result.isCancelled) return;
+    let token = await AccessToken.getCurrentAccessToken();
     dispatch({ type: AuthTypes.LOADING });
-
-    try {
-      const result = await LoginManager.logInWithPermissions(['public_profile', 'email']);
-      if (result.isCancelled) return;
-      console.log(result);
-
-      alert('Login was successful with permissions: ' + result.grantedPermissions.toString());
-    } catch (error) {
-      alert('Login failed with error: ' + error);
-    }
+    await loginAction(loginWithFacebookCredentials(token.accessToken), dispatch);
   },
 });
 
 type DispatchAction = typeof authActions;
 
-const INITIAL_STATE = {
+const INITIAL_STATE: State = {
   user: undefined,
   auth_token: undefined,
   isLoading: false,

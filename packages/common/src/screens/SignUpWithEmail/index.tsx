@@ -5,14 +5,14 @@ import { ActivityLoader, Button, DismissKeyboard } from '../../components';
 import { AuthContext } from '../../context/AuthContext';
 import { Container, H1, InputCaption, Label, Text, ErrorLabel, Input } from '../../styled';
 import formConfig from './formConfig';
-import { Routes } from '../../router';
+import { Routes, ScreenProps } from '../../router';
 
 export type FormState = Partial<User & { password: string; confirm_password: string }>;
 export type FormErrorState = { [T in keyof FormState]: string };
 
 console.disableYellowBox = true;
 const isWeb = Platform.OS == 'web';
-export default ({ navigation }) => {
+export default ({ navigation }: ScreenProps) => {
   const { signUpWithEmail, state } = React.useContext(AuthContext);
   const [info, setInfo] = useState<FormState>({});
   const [formError, setFormError] = useState<FormErrorState>({});

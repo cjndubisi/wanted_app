@@ -1,14 +1,17 @@
 // import { default as fire } from 'node-fetch';
-import { RegisterResponse, User, LoginResponse } from './types';
+import { AuthResponse, User } from './types';
 import Config from './../utils/constants';
 
 const { API_URL } = Config;
+const DefaultHeader = {
+  'Content-Type': 'application/json',
+};
 
-export const register = async (user: Partial<User>): Promise<RegisterResponse> => {
-  const response = await fetch(`${API_URL}${'/users'}`, {
+const post = async (url: string, body: { [key: string]: any }): Promise<AuthResponse> => {
+  const response = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
+    headers: DefaultHeader,
+    body: JSON.stringify(body),
   });
 
   const json = await response.json();
@@ -18,20 +21,10 @@ export const register = async (user: Partial<User>): Promise<RegisterResponse> =
   return json;
 };
 
-export const login = async (
-  user: Partial<{ password: string; email: string }>
-): Promise<LoginResponse> => {
-  // To be updated
-  const response = await fetch(`${API_URL}${'/users/login'}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(user),
-  });
+export const register = async (user: Partial<User>) => post(`${API_URL}${'/users'}`, user);
 
-  const json = await response.json();
-  if (!response.ok) {
-    throw json.errors || json;
-  }
+export const login = async (user: Partial<{ password: string; email: string }>) =>
+  post(`${API_URL}${'/users/login'}`, user);
 
-  return json;
-};
+export const loginWithFacebookCredentials = async (token: string) =>
+  post(`${API_URL}/facebook_login`, { token });
