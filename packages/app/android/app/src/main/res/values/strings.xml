@@ -4,4 +4,5 @@
     <string name="appCenterAnalytics_whenToEnableAnalytics" moduleConfig="true" translatable="false">ALWAYS_SEND</string>
     <string name="facebook_app_id">583730308910753</string>
     <string name="fb_login_protocol_scheme">fb583730308910753</string>
+    <string name="server_client_id">946752153953-2m9mmo18m9egk10845raadcnnh28mvbk.apps.googleusercontent.com</string>
 </resources>

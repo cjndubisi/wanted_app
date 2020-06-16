@@ -20,11 +20,29 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb583730308910753</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.946752153953-ajfbf28ogipqpr4ar6ttrvltshfmgu8s</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>15</string>
-	<key>LSRequiresIPhoneOS</key>
-	<true/>
-
+	<key>FacebookAppID</key>
+	<string>583730308910753</string>
+	<key>FacebookDisplayName</key>
+	<string>Hoshi</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -43,19 +61,8 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-		<key>CFBundleURLSchemes</key>
-		<array>
-			<string>fb583730308910753</string>
-		</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>583730308910753</string>
-	<key>FacebookDisplayName</key>
-	<string>Hoshi</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>

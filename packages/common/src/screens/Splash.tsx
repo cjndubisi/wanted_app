@@ -19,7 +19,7 @@ export default ({ navigation }: ScreenProps) => {
     navigation.navigate(Routes.EmailLogin.path);
   };
 
-  const { loginWithFacebook } = useContext(AuthContext);
+  const { loginWithFacebook, loginWithGoogle } = useContext(AuthContext);
 
   return (
     <Container>
@@ -47,6 +47,13 @@ export default ({ navigation }: ScreenProps) => {
           title="Sign in with Facebook"
           titleColor="white"
           onPress={loginWithFacebook}
+        />
+        <Button
+          bold
+          backgroundColor="brown"
+          title="Sign in with Google"
+          titleColor="white"
+          onPress={loginWithGoogle}
         />
       </Footer>
     </Container>

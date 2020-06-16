@@ -1,9 +1,10 @@
 import { Dispatch, Reducer, ReducerAction } from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import { login, register, loginWithFacebookCredentials } from '../api';
+import { login, register, loginWithFacebookCredentials, loginWithGoogleCredentials } from '../api';
 import { User, LoginResponse } from '../api/types';
 import createDataContext from './createDataProvider';
 import { LoginManager, AccessToken } from 'react-native-fbsdk';
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 
 const AUTH_USER_TOKEN_KEY = 'AUTH_USER_TOKEN_KEY';
 
@@ -60,8 +61,9 @@ const authReducer: AuthReducer = (prevState, action) => {
 const loginAction = async (login: Promise<LoginResponse>, dispatch: (value: Action) => void) => {
   try {
     const { user, auth_token } = await login;
-    await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
+    console.log(user, auth_token);
 
+    await AsyncStorage.setItem(AUTH_USER_TOKEN_KEY, auth_token);
     dispatch({
       type: AuthTypes.AUTH_SUCCESS,
       payload: {
@@ -81,6 +83,7 @@ const loginAction = async (login: Promise<LoginResponse>, dispatch: (value: Acti
 
 const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
   tryToLogin: async () => {
+    GoogleSignin.configure();
     await AsyncStorage.clear();
     const auth_token = await AsyncStorage.getItem(AUTH_USER_TOKEN_KEY);
     if (auth_token) {
@@ -107,6 +110,27 @@ const authActions = (dispatch: Dispatch<ReducerAction<AuthReducer>>) => ({
     let token = await AccessToken.getCurrentAccessToken();
     dispatch({ type: AuthTypes.LOADING });
     await loginAction(loginWithFacebookCredentials(token.accessToken), dispatch);
+  },
+  loginWithGoogle: async (token: string) => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const { idToken } = await GoogleSignin.signIn();
+      console.log(idToken);
+
+      await loginAction(loginWithGoogleCredentials(idToken), dispatch);
+    } catch (error) {
+      if (
+        [
+          statusCodes.SIGN_IN_CANCELLED,
+          statusCodes.IN_PROGRESS,
+          statusCodes.PLAY_SERVICES_NOT_AVAILABLE,
+        ].indexOf(error.code) !== -1
+      ) {
+        return;
+      }
+
+      throw error;
+    }
   },
 });
 

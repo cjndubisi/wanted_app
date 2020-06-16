@@ -27,4 +27,8 @@ export const login = async (user: Partial<{ password: string; email: string }>) 
   post(`${API_URL}${'/users/login'}`, user);
 
 export const loginWithFacebookCredentials = async (token: string) =>
-  post(`${API_URL}/facebook_login`, { token });
+  post(`${API_URL}/facebook`, { token });
+
+
+export const loginWithGoogleCredentials = async (token: string) =>
+post(`${API_URL}/google`, { token });
